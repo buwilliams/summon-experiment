@@ -35,69 +35,69 @@ Each condition is run through three **lenses**, one experiment each:
 
 ## Results
 
-From one full run (`results-three-lens-run1/`). That run used an earlier "reasonableness" version of critical-rationalism D, which made it sound like the other styles; D has since been restored to its distinctive questions plus a light proportion check (see `spec.md` §5), and the next run will use that version. Each number is Jev's preference score: its probability that an outcome is the best of those compared. **Bold** marks the top score in each column.
+From one full run (`results-three-lens-run2/`) of the current tests. Each number is Jev's preference score: its probability that an outcome is the best of those compared.
 
 ### Individual experiments
 
-One table per scenario. Each column is one lens's comparison of its five outcomes (0.20 means no preference); **bold** marks the lens's top condition. The last line compares the three lenses' D outcomes head to head (0.33 means no preference).
+One table per scenario. Each column is one lens's comparison of its five outcomes (0.20 means no preference); **bold** marks the lens's top condition. The line below each table compares the three lenses' D outcomes head to head (0.33 means no preference).
 
 **independent-lab**
 
 | Condition | critical-rationalism | social | economic |
 |---|---|---|---|
-| A Plain | 0.18 | 0.10 | 0.06 |
-| B Persona | 0.25 | **0.41** | **0.31** |
-| C Method named | 0.01 | 0.10 | 0.25 |
-| D Method enacted | 0.10 | 0.15 | 0.11 |
-| E Child lens | **0.46** | 0.24 | 0.27 |
+| A Plain | 0.10 | 0.18 | 0.15 |
+| B Persona | 0.24 | 0.17 | 0.14 |
+| C Method named | **0.37** | 0.03 | 0.22 |
+| D Method enacted | 0.16 | 0.20 | 0.24 |
+| E Child lens | 0.13 | **0.42** | **0.25** |
 
-Across lenses (D): critical-rationalism 0.24, **social 0.63**, economic 0.13
+Across lenses (D): **critical-rationalism 0.42**, social 0.39, economic 0.19
 
 **legacy-rewrite**
 
 | Condition | critical-rationalism | social | economic |
 |---|---|---|---|
-| A Plain | **0.44** | 0.29 | 0.08 |
-| B Persona | 0.02 | 0.14 | **0.36** |
-| C Method named | 0.09 | 0.03 | 0.04 |
-| D Method enacted | 0.18 | 0.04 | 0.20 |
-| E Child lens | 0.27 | **0.50** | 0.32 |
+| A Plain | 0.02 | 0.14 | 0.16 |
+| B Persona | 0.24 | 0.07 | 0.21 |
+| C Method named | 0.23 | **0.40** | 0.27 |
+| D Method enacted | 0.22 | 0.01 | 0.06 |
+| E Child lens | **0.29** | 0.38 | **0.30** |
 
-Across lenses (D): critical-rationalism 0.23, social 0.06, **economic 0.71**
+Across lenses (D): critical-rationalism 0.40, social 0.08, **economic 0.52**
 
 **churn-cause**
 
 | Condition | critical-rationalism | social | economic |
 |---|---|---|---|
-| A Plain | 0.26 | **0.37** | 0.34 |
-| B Persona | **0.55** | 0.18 | **0.48** |
-| C Method named | 0.06 | 0.22 | 0.06 |
-| D Method enacted | 0.04 | 0.22 | 0.10 |
-| E Child lens | 0.08 | 0.01 | 0.02 |
+| A Plain | 0.16 | 0.12 | **0.36** |
+| B Persona | 0.06 | 0.13 | 0.29 |
+| C Method named | 0.03 | **0.61** | 0.06 |
+| D Method enacted | **0.73** | 0.02 | 0.16 |
+| E Child lens | 0.02 | 0.12 | 0.13 |
 
-Across lenses (D): critical-rationalism 0.21, **social 0.47**, economic 0.32
+Across lenses (D): **critical-rationalism 0.73**, social 0.16, economic 0.11
 
 ### Cumulative
 
-**All nine comparisons** (3 lenses × 3 scenarios), each weighted equally:
+**All nine comparisons** (3 scenarios × 3 lenses), each weighted equally. The lens columns average each lens's three scenarios.
 
 | Rank | Condition | Average score | Comparisons won | critical-rationalism | social | economic |
 |---|---|---|---|---|---|---|
-| 1 | B Persona | **0.30** | 5 of 9 | 0.27 | 0.24 | 0.38 |
-| 2 | E Child lens | 0.24 | 2 of 9 | 0.27 | 0.25 | 0.20 |
-| 3 | A Plain | 0.24 | 2 of 9 | 0.29 | 0.25 | 0.16 |
-| 4 | D Method enacted | 0.13 | 0 of 9 | 0.11 | 0.14 | 0.14 |
-| 5 | C Method named | 0.10 | 0 of 9 | 0.05 | 0.12 | 0.12 |
+| 1 | C Method named | 0.25 | 3 of 9 | 0.21 | **0.35** | 0.18 |
+| 2 | E Child lens | 0.23 | 3 of 9 | 0.15 | 0.31 | **0.23** |
+| 3 | D Method enacted | 0.20 | 2 of 9 | **0.37** | 0.08 | 0.15 |
+| 4 | B Persona | 0.17 | 0 of 9 | 0.18 | 0.12 | 0.21 |
+| 5 | A Plain | 0.15 | 1 of 9 | 0.09 | 0.15 | 0.22 |
 
-**Across lenses:** the method-enacted (D) outcome from each lens, compared head to head (3 outcomes per scenario, so 0.33 means no preference):
+**Across lenses:** each lens's D outcome, averaged over the three scenarios:
 
-| Lens | independent-lab | legacy-rewrite | churn-cause | Average |
-|---|---|---|---|---|
-| social | **0.63** | 0.06 | **0.47** | 0.39 |
-| economic | 0.13 | **0.71** | 0.32 | 0.39 |
-| critical-rationalism | 0.24 | 0.23 | 0.21 | 0.23 |
+| Rank | Lens | Average score | Scenarios won |
+|---|---|---|---|
+| 1 | critical-rationalism | 0.52 | 2 of 3 |
+| 2 | economic | 0.27 | 1 of 3 |
+| 3 | social | 0.21 | 0 of 3 |
 
-**Reading these:** each cell comes from one conversation and one Jev call, and earlier runs showed single runs can reorder. The full conversations are in `results-three-lens-run1/<scenario>/<lens>/<test>.md` and Jev's raw judgments in the `judgment.json` files.
+**Reading these:** each cell comes from one conversation and one Jev call, and earlier runs showed that single runs can reorder, so treat small differences as noise. The full conversations are in `results-three-lens-run2/<scenario>/<lens>/<test>.md`, and Jev's raw judgments are in the `judgment.json` files.
 
 ## Running it
 
@@ -112,6 +112,6 @@ A full run takes about 30 minutes and costs roughly $25 in Opus usage; Jev's cos
 
 - `spec.md`: the full design.
 - `experiments/`: organized scenario > lens > test. Each scenario folder (`###-<name>/`) holds `scenario.md` and a folder per lens with the five test files. Each test file holds the opening prompt and the guidance for its follow-up questions; a lens's tests are identical in every scenario.
-- `results-three-lens-run1/`: the run reported above, with every conversation in readable Markdown and a `report.md`.
-- `results-oneshot-run1/`, `results-oneshot-run2/`, `results-conversation-run1/`, `results-archive/`: earlier runs from previous versions of the design (one-shot prompts, a single lens, the original D). Useful for historical comparison, but not directly comparable with the current results.
+- `results-three-lens-run2/`: the run reported above, with every conversation in readable Markdown and a `report.md`.
+- `results-three-lens-run1/`, `results-oneshot-run1/`, `results-oneshot-run2/`, `results-conversation-run1/`, `results-archive/`: earlier runs from previous versions of the design (older B, D, and E; one-shot prompts; a single lens). Useful for historical comparison, but not directly comparable with the current results.
 - `src/summon/`: the code.

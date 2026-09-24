@@ -1,0 +1,53 @@
+{
+  "scenario": "legacy-rewrite",
+  "judge_model": "typesafe/jev-1.13",
+  "question": "Which answer do you think is better?",
+  "display_order": [
+    "testE",
+    "testB",
+    "testD",
+    "testA",
+    "testC"
+  ],
+  "id_to_option": {
+    "answer_1": "testE",
+    "answer_2": "testB",
+    "answer_3": "testD",
+    "answer_4": "testA",
+    "answer_5": "testC"
+  },
+  "scores": {
+    "testA": 0.16,
+    "testB": 0.21,
+    "testC": 0.27,
+    "testD": 0.06,
+    "testE": 0.3
+  },
+  "top_choice": "testE",
+  "confidence": 0.12,
+  "judged_at": "2026-09-24T15:37:05.202135+00:00",
+  "raw_response": {
+    "model": "typesafe/jev-1.13-20260917",
+    "answers": {
+      "better": {
+        "type": "choice",
+        "choice": "answer_1",
+        "probabilities": {
+          "answer_4": 0.16,
+          "answer_5": 0.27,
+          "answer_1": 0.3,
+          "answer_3": 0.06,
+          "answer_2": 0.21
+        },
+        "confidence": 0.12
+      }
+    },
+    "usage": {
+      "input_tokens": 2694,
+      "output_tokens": 64,
+      "cost": 0.000113148
+    },
+    "id": "gen-dec-1790264225-neH7iTkgXyXRQE0TZEWc",
+    "provider": "TypeSafe"
+  }
+}

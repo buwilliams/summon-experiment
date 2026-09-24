@@ -1,0 +1,45 @@
+{
+  "scenario": "churn-cause",
+  "judge_model": "typesafe/jev-1.13",
+  "question": "Which answer do you think is better?",
+  "display_order": [
+    "social",
+    "critical-rationalism",
+    "economic"
+  ],
+  "id_to_option": {
+    "answer_1": "social",
+    "answer_2": "critical-rationalism",
+    "answer_3": "economic"
+  },
+  "scores": {
+    "critical-rationalism": 0.73,
+    "economic": 0.11,
+    "social": 0.16
+  },
+  "top_choice": "critical-rationalism",
+  "confidence": 0.59,
+  "judged_at": "2026-09-24T15:37:05.884297+00:00",
+  "raw_response": {
+    "model": "typesafe/jev-1.13-20260917",
+    "answers": {
+      "better": {
+        "type": "choice",
+        "choice": "answer_2",
+        "probabilities": {
+          "answer_2": 0.73,
+          "answer_1": 0.16,
+          "answer_3": 0.11
+        },
+        "confidence": 0.59
+      }
+    },
+    "usage": {
+      "input_tokens": 1877,
+      "output_tokens": 46,
+      "cost": 7.8834e-05
+    },
+    "id": "gen-dec-1790264225-5tgI1y6fe4tJdmHVwUOP",
+    "provider": "TypeSafe"
+  }
+}

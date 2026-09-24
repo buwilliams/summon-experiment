@@ -1,0 +1,288 @@
+=== three-lens run 2 started 2026-09-24T11:19:57-04:00 ===
+0 of 45 tests already done; running 45 with 8 in parallel
+independent-lab/economic/testA: turn 1/5 done (593 words)
+independent-lab/critical-rationalism/testA: turn 1/5 done (681 words)
+independent-lab/critical-rationalism/testE: turn 1/5 done (955 words)
+independent-lab/critical-rationalism/testB: turn 1/5 done (825 words)
+independent-lab/economic/testB: turn 1/5 done (996 words)
+independent-lab/economic/testC: turn 1/5 done (974 words)
+independent-lab/critical-rationalism/testE: turn 2/5 done (297 words)
+independent-lab/critical-rationalism/testA: turn 2/5 done (774 words)
+independent-lab/economic/testA: turn 2/5 done (755 words)
+independent-lab/critical-rationalism/testD: turn 1/5 done (1168 words)
+independent-lab/critical-rationalism/testE: turn 3/5 done (371 words)
+independent-lab/critical-rationalism/testB: turn 2/5 done (938 words)
+independent-lab/critical-rationalism/testE: turn 4/5 done (220 words)
+independent-lab/critical-rationalism/testA: turn 3/5 done (557 words)
+independent-lab/critical-rationalism/testC: turn 1/5 done (1478 words)
+independent-lab/economic/testA: turn 3/5 done (753 words)
+independent-lab/economic/testC: turn 2/5 done (879 words)
+independent-lab/critical-rationalism/testE: turn 5/5 done (437 words)
+independent-lab/critical-rationalism/testE: ok [1/45] final answer 437 words, summary 300 words
+independent-lab/critical-rationalism/testB: turn 3/5 done (681 words)
+independent-lab/economic/testB: turn 2/5 done (1712 words)
+independent-lab/critical-rationalism/testA: turn 4/5 done (726 words)
+independent-lab/critical-rationalism/testA: turn 5/5 done (401 words)
+independent-lab/economic/testA: turn 4/5 done (870 words)
+independent-lab/critical-rationalism/testD: turn 2/5 done (1065 words)
+independent-lab/critical-rationalism/testA: ok [2/45] final answer 401 words, summary 307 words
+independent-lab/economic/testC: turn 3/5 done (981 words)
+independent-lab/critical-rationalism/testB: turn 4/5 done (652 words)
+independent-lab/economic/testA: turn 5/5 done (432 words)
+independent-lab/economic/testA: ok [3/45] final answer 432 words, summary 291 words
+independent-lab/critical-rationalism/testB: turn 5/5 done (591 words)
+independent-lab/economic/testB: turn 3/5 done (1392 words)
+independent-lab/critical-rationalism/testC: turn 2/5 done (1454 words)
+independent-lab/critical-rationalism/testB: ok [4/45] final answer 591 words, summary 342 words
+independent-lab/social/testA: turn 1/5 done (746 words)
+independent-lab/economic/testE: turn 1/5 done (1003 words)
+independent-lab/critical-rationalism/testD: turn 3/5 done (1016 words)
+independent-lab/economic/testC: turn 4/5 done (1206 words)
+independent-lab/economic/testD: turn 1/5 done (2004 words)
+independent-lab/economic/testE: turn 2/5 done (531 words)
+independent-lab/social/testB: turn 1/5 done (951 words)
+independent-lab/economic/testC: turn 5/5 done (755 words)
+independent-lab/social/testA: turn 2/5 done (843 words)
+independent-lab/economic/testB: turn 4/5 done (1675 words)
+independent-lab/economic/testC: ok [5/45] final answer 755 words, summary 306 words
+independent-lab/economic/testE: turn 3/5 done (486 words)
+independent-lab/critical-rationalism/testC: turn 3/5 done (1358 words)
+independent-lab/economic/testE: turn 4/5 done (541 words)
+independent-lab/social/testB: turn 2/5 done (1075 words)
+independent-lab/social/testA: turn 3/5 done (848 words)
+independent-lab/critical-rationalism/testD: turn 4/5 done (1086 words)
+independent-lab/economic/testB: turn 5/5 done (1257 words)
+independent-lab/social/testC: turn 1/5 done (1194 words)
+independent-lab/economic/testB: ok [6/45] final answer 1257 words, summary 319 words
+independent-lab/economic/testE: turn 5/5 done (776 words)
+independent-lab/economic/testD: turn 2/5 done (1027 words)
+independent-lab/social/testA: turn 4/5 done (632 words)
+independent-lab/economic/testE: ok [7/45] final answer 776 words, summary 306 words
+independent-lab/social/testB: turn 3/5 done (1043 words)
+independent-lab/critical-rationalism/testD: turn 5/5 done (941 words)
+independent-lab/social/testA: turn 5/5 done (558 words)
+independent-lab/critical-rationalism/testC: turn 4/5 done (1611 words)
+independent-lab/critical-rationalism/testD: ok [8/45] final answer 941 words, summary 302 words
+independent-lab/social/testA: ok [9/45] final answer 558 words, summary 313 words
+independent-lab/social/testE: turn 1/5 done (958 words)
+independent-lab/social/testC: turn 2/5 done (1722 words)
+independent-lab/social/testD: turn 1/5 done (1423 words)
+independent-lab/social/testB: turn 4/5 done (1411 words)
+legacy-rewrite/critical-rationalism/testA: turn 1/5 done (824 words)
+independent-lab/critical-rationalism/testC: turn 5/5 done (753 words)
+independent-lab/economic/testD: turn 3/5 done (1183 words)
+independent-lab/social/testE: turn 2/5 done (624 words)
+independent-lab/critical-rationalism/testC: ok [10/45] final answer 753 words, summary 307 words
+legacy-rewrite/critical-rationalism/testB: turn 1/5 done (938 words)
+legacy-rewrite/critical-rationalism/testA: turn 2/5 done (751 words)
+independent-lab/social/testB: turn 5/5 done (837 words)
+independent-lab/social/testE: turn 3/5 done (589 words)
+independent-lab/social/testD: turn 2/5 done (941 words)
+independent-lab/social/testB: ok [11/45] final answer 837 words, summary 300 words
+independent-lab/social/testC: turn 3/5 done (2020 words)
+legacy-rewrite/critical-rationalism/testA: turn 3/5 done (684 words)
+independent-lab/social/testE: turn 4/5 done (592 words)
+legacy-rewrite/critical-rationalism/testB: turn 2/5 done (1125 words)
+legacy-rewrite/critical-rationalism/testC: turn 1/5 done (1417 words)
+independent-lab/social/testD: turn 3/5 done (912 words)
+independent-lab/social/testE: turn 5/5 done (641 words)
+legacy-rewrite/critical-rationalism/testA: turn 4/5 done (768 words)
+independent-lab/economic/testD: turn 4/5 done (1099 words)
+independent-lab/social/testE: ok [12/45] final answer 641 words, summary 293 words
+legacy-rewrite/critical-rationalism/testB: turn 3/5 done (940 words)
+legacy-rewrite/critical-rationalism/testA: turn 5/5 done (513 words)
+legacy-rewrite/critical-rationalism/testA: ok [13/45] final answer 513 words, summary 333 words
+legacy-rewrite/critical-rationalism/testC: turn 2/5 done (958 words)
+independent-lab/social/testD: turn 4/5 done (1161 words)
+legacy-rewrite/critical-rationalism/testD: turn 1/5 done (1742 words)
+independent-lab/economic/testD: turn 5/5 done (914 words)
+independent-lab/social/testC: turn 4/5 done (2270 words)
+independent-lab/economic/testD: ok [14/45] final answer 914 words, summary 310 words
+legacy-rewrite/critical-rationalism/testB: turn 4/5 done (1105 words)
+legacy-rewrite/critical-rationalism/testE: turn 1/5 done (942 words)
+legacy-rewrite/economic/testA: turn 1/5 done (911 words)
+independent-lab/social/testD: turn 5/5 done (900 words)
+independent-lab/social/testC: turn 5/5 done (725 words)
+legacy-rewrite/critical-rationalism/testB: turn 5/5 done (640 words)
+independent-lab/social/testC: ok [15/45] final answer 725 words, summary 297 words
+legacy-rewrite/critical-rationalism/testE: turn 2/5 done (394 words)
+independent-lab/social/testD: ok [16/45] final answer 900 words, summary 308 words
+legacy-rewrite/critical-rationalism/testB: ok [17/45] final answer 640 words, summary 332 words
+legacy-rewrite/critical-rationalism/testC: turn 3/5 done (1114 words)
+legacy-rewrite/economic/testB: turn 1/5 done (944 words)
+legacy-rewrite/critical-rationalism/testE: turn 3/5 done (196 words)
+legacy-rewrite/economic/testA: turn 2/5 done (863 words)
+legacy-rewrite/critical-rationalism/testD: turn 2/5 done (1081 words)
+legacy-rewrite/critical-rationalism/testE: turn 4/5 done (353 words)
+legacy-rewrite/economic/testC: turn 1/5 done (1057 words)
+legacy-rewrite/economic/testA: turn 3/5 done (772 words)
+legacy-rewrite/economic/testB: turn 2/5 done (968 words)
+legacy-rewrite/critical-rationalism/testC: turn 4/5 done (1193 words)
+legacy-rewrite/critical-rationalism/testE: turn 5/5 done (675 words)
+legacy-rewrite/economic/testE: turn 1/5 done (1352 words)
+legacy-rewrite/critical-rationalism/testE: ok [18/45] final answer 675 words, summary 348 words
+legacy-rewrite/critical-rationalism/testD: turn 3/5 done (958 words)
+legacy-rewrite/economic/testA: turn 4/5 done (870 words)
+legacy-rewrite/economic/testE: turn 2/5 done (580 words)
+legacy-rewrite/economic/testD: turn 1/5 done (2118 words)
+legacy-rewrite/critical-rationalism/testC: turn 5/5 done (773 words)
+legacy-rewrite/economic/testA: turn 5/5 done (515 words)
+legacy-rewrite/economic/testC: turn 2/5 done (1174 words)
+legacy-rewrite/critical-rationalism/testC: ok [19/45] final answer 773 words, summary 321 words
+legacy-rewrite/economic/testB: turn 3/5 done (1165 words)
+legacy-rewrite/economic/testA: ok [20/45] final answer 515 words, summary 302 words
+legacy-rewrite/social/testA: turn 1/5 done (831 words)
+legacy-rewrite/economic/testE: turn 3/5 done (555 words)
+legacy-rewrite/economic/testE: turn 4/5 done (438 words)
+legacy-rewrite/critical-rationalism/testD: turn 4/5 done (925 words)
+legacy-rewrite/social/testA: turn 2/5 done (1034 words)
+legacy-rewrite/economic/testB: turn 4/5 done (1167 words)
+legacy-rewrite/economic/testC: turn 3/5 done (1215 words)
+legacy-rewrite/social/testB: turn 1/5 done (978 words)
+legacy-rewrite/economic/testE: turn 5/5 done (716 words)
+legacy-rewrite/social/testC: turn 1/5 done (1088 words)
+legacy-rewrite/economic/testE: ok [21/45] final answer 716 words, summary 306 words
+legacy-rewrite/economic/testD: turn 2/5 done (1238 words)
+legacy-rewrite/critical-rationalism/testD: turn 5/5 done (733 words)
+legacy-rewrite/economic/testB: turn 5/5 done (956 words)
+legacy-rewrite/critical-rationalism/testD: ok [22/45] final answer 733 words, summary 359 words
+legacy-rewrite/social/testB: turn 2/5 done (996 words)
+legacy-rewrite/economic/testB: ok [23/45] final answer 956 words, summary 327 words
+legacy-rewrite/social/testA: turn 3/5 done (993 words)
+legacy-rewrite/economic/testC: turn 4/5 done (1308 words)
+legacy-rewrite/social/testC: turn 2/5 done (1250 words)
+legacy-rewrite/social/testD: turn 1/5 done (1332 words)
+legacy-rewrite/social/testB: turn 3/5 done (819 words)
+churn-cause/critical-rationalism/testA: turn 1/5 done (715 words)
+legacy-rewrite/social/testE: turn 1/5 done (842 words)
+legacy-rewrite/economic/testD: turn 3/5 done (1076 words)
+legacy-rewrite/economic/testC: turn 5/5 done (976 words)
+legacy-rewrite/social/testE: turn 2/5 done (238 words)
+legacy-rewrite/social/testA: turn 4/5 done (1222 words)
+legacy-rewrite/economic/testC: ok [24/45] final answer 976 words, summary 296 words
+churn-cause/critical-rationalism/testA: turn 2/5 done (864 words)
+legacy-rewrite/social/testE: turn 3/5 done (264 words)
+legacy-rewrite/social/testB: turn 4/5 done (964 words)
+legacy-rewrite/social/testC: turn 3/5 done (1225 words)
+legacy-rewrite/social/testD: turn 2/5 done (953 words)
+legacy-rewrite/social/testE: turn 4/5 done (200 words)
+legacy-rewrite/social/testB: turn 5/5 done (510 words)
+legacy-rewrite/social/testA: turn 5/5 done (836 words)
+legacy-rewrite/social/testE: turn 5/5 done (485 words)
+legacy-rewrite/social/testB: ok [25/45] final answer 510 words, summary 346 words
+legacy-rewrite/social/testA: ok [26/45] final answer 836 words, summary 326 words
+churn-cause/critical-rationalism/testA: turn 3/5 done (828 words)
+churn-cause/critical-rationalism/testB: turn 1/5 done (915 words)
+legacy-rewrite/social/testE: ok [27/45] final answer 485 words, summary 339 words
+legacy-rewrite/social/testD: turn 3/5 done (983 words)
+churn-cause/critical-rationalism/testA: turn 4/5 done (668 words)
+legacy-rewrite/social/testC: turn 4/5 done (1456 words)
+churn-cause/critical-rationalism/testE: turn 1/5 done (828 words)
+churn-cause/critical-rationalism/testA: turn 5/5 done (594 words)
+churn-cause/critical-rationalism/testB: turn 2/5 done (962 words)
+churn-cause/critical-rationalism/testE: turn 2/5 done (83 words)
+legacy-rewrite/social/testD: turn 4/5 done (849 words)
+legacy-rewrite/economic/testD: turn 4/5 done (1166 words)
+legacy-rewrite/social/testC: turn 5/5 done (702 words)
+churn-cause/critical-rationalism/testA: ok [28/45] final answer 594 words, summary 301 words
+churn-cause/critical-rationalism/testE: turn 3/5 done (154 words)
+legacy-rewrite/social/testC: ok [29/45] final answer 702 words, summary 332 words
+churn-cause/critical-rationalism/testE: turn 4/5 done (210 words)
+churn-cause/critical-rationalism/testC: turn 1/5 done (1402 words)
+legacy-rewrite/social/testD: turn 5/5 done (822 words)
+churn-cause/critical-rationalism/testE: turn 5/5 done (399 words)
+legacy-rewrite/social/testD: ok [30/45] final answer 822 words, summary 334 words
+churn-cause/critical-rationalism/testD: turn 1/5 done (1688 words)
+legacy-rewrite/economic/testD: turn 5/5 done (846 words)
+churn-cause/critical-rationalism/testB: turn 3/5 done (997 words)
+churn-cause/critical-rationalism/testE: ok [31/45] final answer 399 words, summary 312 words
+churn-cause/economic/testA: turn 1/5 done (883 words)
+legacy-rewrite/economic/testD: ok [32/45] final answer 846 words, summary 339 words
+churn-cause/economic/testB: turn 1/5 done (801 words)
+churn-cause/critical-rationalism/testC: turn 2/5 done (1075 words)
+churn-cause/economic/testA: turn 2/5 done (1045 words)
+churn-cause/economic/testC: turn 1/5 done (1156 words)
+churn-cause/critical-rationalism/testD: turn 2/5 done (947 words)
+churn-cause/economic/testB: turn 2/5 done (780 words)
+churn-cause/critical-rationalism/testB: turn 4/5 done (1395 words)
+churn-cause/economic/testE: turn 1/5 done (1261 words)
+churn-cause/economic/testA: turn 3/5 done (1151 words)
+churn-cause/critical-rationalism/testC: turn 3/5 done (1212 words)
+churn-cause/critical-rationalism/testB: turn 5/5 done (675 words)
+churn-cause/economic/testC: turn 2/5 done (1095 words)
+churn-cause/economic/testB: turn 3/5 done (1087 words)
+churn-cause/critical-rationalism/testB: ok [33/45] final answer 675 words, summary 320 words
+churn-cause/economic/testE: turn 2/5 done (874 words)
+churn-cause/economic/testD: turn 1/5 done (2044 words)
+churn-cause/economic/testA: turn 4/5 done (839 words)
+churn-cause/critical-rationalism/testD: turn 3/5 done (1105 words)
+churn-cause/economic/testE: turn 3/5 done (668 words)
+churn-cause/economic/testB: turn 4/5 done (896 words)
+churn-cause/economic/testA: turn 5/5 done (653 words)
+churn-cause/social/testA: turn 1/5 done (990 words)
+churn-cause/economic/testA: ok [34/45] final answer 653 words, summary 303 words
+churn-cause/economic/testC: turn 3/5 done (1165 words)
+churn-cause/economic/testB: turn 5/5 done (581 words)
+churn-cause/critical-rationalism/testC: turn 4/5 done (1342 words)
+churn-cause/economic/testE: turn 4/5 done (441 words)
+churn-cause/economic/testB: ok [35/45] final answer 581 words, summary 292 words
+churn-cause/economic/testE: turn 5/5 done (506 words)
+churn-cause/economic/testE: ok [36/45] final answer 506 words, summary 318 words
+churn-cause/social/testA: turn 2/5 done (863 words)
+churn-cause/critical-rationalism/testC: turn 5/5 done (846 words)
+churn-cause/critical-rationalism/testD: turn 4/5 done (1023 words)
+churn-cause/social/testB: turn 1/5 done (941 words)
+churn-cause/critical-rationalism/testC: ok [37/45] final answer 846 words, summary 292 words
+churn-cause/economic/testC: turn 4/5 done (1133 words)
+churn-cause/social/testC: turn 1/5 done (1020 words)
+churn-cause/social/testA: turn 3/5 done (907 words)
+churn-cause/social/testB: turn 2/5 done (798 words)
+churn-cause/economic/testC: turn 5/5 done (975 words)
+churn-cause/critical-rationalism/testD: turn 5/5 done (896 words)
+churn-cause/social/testD: turn 1/5 done (1245 words)
+churn-cause/economic/testC: ok [38/45] final answer 975 words, summary 301 words
+churn-cause/social/testE: turn 1/5 done (1036 words)
+churn-cause/economic/testD: turn 2/5 done (1174 words)
+churn-cause/critical-rationalism/testD: ok [39/45] final answer 896 words, summary 320 words
+churn-cause/social/testA: turn 4/5 done (827 words)
+churn-cause/social/testE: turn 2/5 done (264 words)
+churn-cause/social/testB: turn 3/5 done (796 words)
+churn-cause/social/testE: turn 3/5 done (130 words)
+churn-cause/social/testA: turn 5/5 done (589 words)
+churn-cause/social/testD: turn 2/5 done (648 words)
+churn-cause/social/testE: turn 4/5 done (228 words)
+churn-cause/social/testC: turn 2/5 done (1812 words)
+churn-cause/social/testA: ok [40/45] final answer 589 words, summary 288 words
+churn-cause/social/testE: turn 5/5 done (345 words)
+churn-cause/social/testB: turn 4/5 done (898 words)
+churn-cause/social/testE: ok [41/45] final answer 345 words, summary 309 words
+churn-cause/social/testD: turn 3/5 done (591 words)
+churn-cause/social/testB: turn 5/5 done (559 words)
+churn-cause/economic/testD: turn 3/5 done (784 words)
+churn-cause/social/testB: ok [42/45] final answer 559 words, summary 306 words
+churn-cause/social/testD: turn 4/5 done (705 words)
+churn-cause/social/testD: turn 5/5 done (539 words)
+churn-cause/social/testC: turn 3/5 done (2023 words)
+churn-cause/social/testD: ok [43/45] final answer 539 words, summary 318 words
+churn-cause/economic/testD: turn 4/5 done (964 words)
+churn-cause/social/testC: turn 4/5 done (2399 words)
+churn-cause/economic/testD: turn 5/5 done (808 words)
+churn-cause/social/testC: turn 5/5 done (949 words)
+churn-cause/economic/testD: ok [44/45] final answer 808 words, summary 372 words
+churn-cause/social/testC: ok [45/45] final answer 949 words, summary 303 words
+
+All tests complete.
+independent-lab/social: testE 0.42  testD 0.20  testA 0.18  testB 0.17  testC 0.03
+legacy-rewrite/critical-rationalism: testE 0.29  testB 0.24  testC 0.23  testD 0.22  testA 0.02
+independent-lab/cross-lens: critical-rationalism 0.42  social 0.39  economic 0.19
+legacy-rewrite/cross-lens: economic 0.52  critical-rationalism 0.40  social 0.08
+legacy-rewrite/economic: testE 0.30  testC 0.27  testB 0.21  testA 0.16  testD 0.06
+legacy-rewrite/social: testC 0.40  testE 0.38  testA 0.14  testB 0.07  testD 0.01
+independent-lab/economic: testE 0.25  testD 0.24  testC 0.22  testA 0.15  testB 0.14
+independent-lab/critical-rationalism: testC 0.37  testB 0.24  testD 0.16  testE 0.13  testA 0.10
+churn-cause/critical-rationalism: testD 0.73  testA 0.16  testB 0.06  testC 0.03  testE 0.02
+churn-cause/social: testC 0.61  testB 0.13  testA 0.12  testE 0.12  testD 0.02
+churn-cause/economic: testA 0.36  testB 0.29  testD 0.16  testE 0.13  testC 0.06
+churn-cause/cross-lens: critical-rationalism 0.73  social 0.16  economic 0.11
+Wrote results/scores.csv and results/report.md.
+=== three-lens run 2 exited 0 at 2026-09-24T11:37:05-04:00 ===
