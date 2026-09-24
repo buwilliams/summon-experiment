@@ -1,0 +1,7 @@
+seed: 20260924
+subject_model: claude-opus-5-5
+max_tokens: 32000
+effort: medium
+followups: 3
+judge_model: typesafe/jev-1.13
+concurrency: 8

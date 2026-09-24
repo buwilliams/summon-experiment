@@ -1,0 +1,88 @@
+# churn-cause/social/testE
+
+Model: claude-opus-5-5 · stop_reason: end_turn · 2026-09-24T11:57:01.132019+00:00
+
+## Prompt
+
+I run customer success at a company that sells claims-management software to regional insurance carriers. Over the last 18 months our annual churn has doubled. Our VP of Product believes customers are leaving because of product gaps: competitors have better analytics and AI features, so we need to accelerate the roadmap. Our VP of Services believes customers are leaving because of a painful implementation and support experience: our implementations run long, and customers never get to full value, so we need to fix onboarding and service before building more features. Which belief is right, and what should we do?
+
+I want to know which idea makes more people want to be your friend. Think about how each idea would look to kids at work and kids outside. Who gets a gold star, and who gets in trouble or says sorry? If each idea happened, would the boss, the helpers, the customers, and everybody's moms think it was cool? Where might wearing a cape or being loud matter more than doing chores? Who would sit together at lunch because of each idea? And is there a third idea where everybody gets to play and nobody feels left out?
+
+## Response
+
+## The short answer
+
+Neither VP has shown they're right yet. Both are telling a plausible story that also happens to put their own function at the center of the solution. This is an empirical question, and you can probably answer it in 30–60 days with data you already have.
+
+My prior, based on how this usually plays out in vertical B2B software: **the services explanation is more often upstream.** A carrier that never fully implemented your product can't really judge your analytics. And when it leaves, "your competitor has better AI" is the polite, easy exit reason. Nobody enjoys telling a vendor "we never got it working." There's also a technical link: analytics and AI features depend on clean, well-integrated data, which is exactly what a rushed or stalled implementation fails to produce. Building AI on top of shallow adoption can make churn worse, not better.
+
+But that's a prior, not a conclusion. Here's how to test it.
+
+## How to find out who's right
+
+1. **Segment churn by implementation outcome.** Split churned and retained customers by time-to-go-live, whether they reached full deployment, and adoption depth (modules used, active users, claims processed through the system).
+   - If churn is concentrated among customers with long or incomplete implementations, Services is mostly right.
+   - If fully implemented, heavily used customers are also leaving at elevated rates, Product has a real case.
+2. **Check where churned customers went.** Did they move to a competitor known for analytics and AI, to a cheaper option, to a core-system vendor's bundled module, or back to spreadsheets? Destination tells you more than stated reasons.
+3. **Look at the 18-month timing.** What changed when churn doubled? A new competitor launch points to product. A surge in new-logo sales that overloaded implementation teams, staff turnover, or a new product version that's harder to configure points to services.
+4. **Re-interview a sample of churned customers** with someone neutral asking, ideally from your team, not Product or Services. Ask what they were trying to accomplish and whether they ever got there, not just why they left.
+5. **Read the support ticket history** for churned accounts in their final 6–12 months. Are the tickets feature requests, or "this doesn't work / we can't figure it out"?
+6. **Check the sales handoff.** Were these customers sold capabilities that didn't exist or required heavy customization? Overpromising is a common hidden third cause that neither VP is likely to raise.
+
+## Who wants to be friends with each idea
+
+Being popular isn't the same as being right. But popularity decides whether a good answer actually gets funded and sustained, so it's worth mapping.
+
+**The "build more features" idea (Product)**
+- **Gold star:** Product, Engineering, Marketing, and likely the CEO. It's forward-looking and exciting.
+- **Who says sorry:** almost nobody, which is part of its appeal. The implied blame ("we fell behind") is soft and shared.
+- **Wearing a cape:** this idea wins on visibility. AI features demo well, make great board slides and press releases, and look good to investors and analysts. This is where being loud can beat doing chores.
+- **Lunch table:** Product, Engineering, Sales (new things to sell), Marketing, and the board.
+- **Risk:** it can feel productive for a year while churn keeps climbing.
+
+**The "fix onboarding and service" idea (Services)**
+- **Gold star:** customers, Support, Implementation teams, and eventually Finance. Retention math is very persuasive to a CFO.
+- **Who says sorry:** this idea implicitly admits that implementations have been painful. That can implicate Services itself, Sales (overpromising), and Product (hard-to-configure software). It asks more people to own a problem.
+- **Doing chores:** the work is unglamorous. Process redesign, templates, staffing, data migration tooling. Much of it is invisible outside the company, even when it works.
+- **Lunch table:** Services, Support, Customer Success, Finance, and your existing customers.
+- **Risk:** it can be dismissed as "not strategic" and underfunded.
+
+**How outsiders see it**
+- **The board and executives** will naturally lean toward features. Frame services work in dollars of retained revenue to keep it competitive.
+- **Employees** will split along functional lines unless leadership frames the problem as shared.
+- **Customers** mostly want the thing they already bought to work. Most would vote for services improvements, though prospects in sales cycles care about the AI story.
+- **The broader market** will notice features, not onboarding improvements, except through reputation and references. In a small market like regional carriers, where buyers talk to each other, references matter a lot.
+
+**Your position:** Customer Success sits between both camps and owns the churn number. That makes you the natural neutral broker, which gives you real influence if you bring data rather than a side.
+
+## The third idea: everybody plays
+
+Reframe the goal from "features vs. service" to **"time-to-value and retention"** as a shared metric that Product, Services, Sales, and CS are all measured on. Then give each group a meaningful role:
+
+- **Product** builds features that speed implementation and adoption: configuration tools, data migration and integration utilities, carrier-type templates, in-app guidance. If AI is on the roadmap, point some of it at onboarding and data quality, or at high-value use cases that work with limited data. Product still gets an AI story, and it directly attacks churn.
+- **Services** redesigns implementation into phased deployments with an early first-value milestone, typically within 60–90 days, plus clear success criteria and a staffing model that doesn't collapse when sales spike.
+- **Sales** adopts a scoping and handoff process so customers aren't sold what can't be delivered on the promised timeline.
+- **Customer Success** owns the diagnostic, the adoption health scores, and the churn-risk early warnings, and reports the shared metric to leadership.
+
+**Sequence it:**
+1. Run the 30–60 day diagnostic above, jointly sponsored by both VPs so neither can dismiss the results.
+2. Allocate investment according to what the data shows, with a portion reserved for implementation-accelerating product work that both sides can claim.
+3. Review quarterly against retention and time-to-value, not features shipped or projects completed.
+
+Present it as "we're going to find out together and fix it together," not "let's see who was wrong." That framing lets everyone sit at the same lunch table, and it keeps both VPs invested in acting on the answer, whichever way it points.
+
+## Summary (sent to Jev)
+
+The response says neither VP has yet shown they are right. Each tells a plausible story that puts their own function at the center of the fix, and the question can likely be settled in 30–60 days with existing data. Its prior, drawn from vertical B2B software, is that the services explanation is more often upstream. Customers who never fully implemented can't judge analytics, "competitor has better AI" is a polite exit reason, and AI features depend on the clean, integrated data that stalled implementations fail to produce. Building AI on shallow adoption could worsen churn. It stresses this is a prior, not a conclusion.
+
+To test it, the response proposes six steps:
+- Segment churned and retained customers by time-to-go-live, deployment completeness, and adoption depth.
+- Check where churned customers went.
+- Examine what changed when churn doubled.
+- Have a neutral party, ideally from Customer Success, re-interview churned customers.
+- Review their final support tickets.
+- Check the sales handoff for overpromising, a hidden third cause.
+
+It then maps who favors each idea. Features appeal to Product, Engineering, Marketing, the board, and likely the CEO because they demo well, but they risk feeling productive while churn climbs. Service fixes appeal to customers, Support, and Finance, but they are unglamorous, implicate several groups, and risk being underfunded. Customer Success is positioned as the neutral broker.
+
+Finally, it recommends a shared "time-to-value and retention" metric. Product would build implementation-accelerating tools, possibly AI aimed at onboarding. Services would create phased deployments with first value within 60–90 days. Sales would tighten scoping, and CS would own diagnostics and health scores. The sequence is a jointly sponsored diagnostic, data-driven allocation, and quarterly reviews, framed as finding out and fixing it together.

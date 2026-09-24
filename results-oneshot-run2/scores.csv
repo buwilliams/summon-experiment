@@ -1,0 +1,16 @@
+scenario,test,condition,preference_score,rank,display_position
+independent-lab,testA,A,0.04,5,2
+independent-lab,testB,B,0.48,1,1
+independent-lab,testC,C,0.25,2,3
+independent-lab,testD,D,0.15,3,5
+independent-lab,testE,E,0.08,4,4
+legacy-rewrite,testA,A,0.06,4,3
+legacy-rewrite,testB,B,0.16,3,5
+legacy-rewrite,testC,C,0.4,1,2
+legacy-rewrite,testD,D,0.34,2,1
+legacy-rewrite,testE,E,0.04,5,4
+churn-cause,testA,A,0.55,1,1
+churn-cause,testB,B,0.14,3,3
+churn-cause,testC,C,0.05,4,5
+churn-cause,testD,D,0.24,2,2
+churn-cause,testE,E,0.02,5,4
