@@ -1,6 +1,6 @@
 # Summon experiment
 
-**Which way of prompting gets the best outcome from an AI model: asking plainly, assigning a persona, naming a method, or enacting the method in its own vocabulary?**
+**Which prompting style gets the best outcome from an AI model: asking plainly, assigning a persona, naming a method, or enacting the method in its own vocabulary?**
 
 The hypothesis is that enacting a method (asking the questions a practitioner would ask, in their language) summons that way of reasoning and beats the other styles. A fifth condition, the same kind of structured questions asked by a curious child, checks that any gain comes from the method and not just from asking more questions. Claude Opus 5.5 is the subject model and [Jev](https://openrouter.ai/docs/guides/community/jev-tutorial) (via OpenRouter) is the judge. The full design is in [`spec.md`](spec.md).
 
