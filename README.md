@@ -31,40 +31,21 @@ Each condition is run through three **lenses**, one experiment each:
 - **Within a lens:** A–E for each scenario (baseline 0.20).
 - **Across lenses:** the D outcomes of the three lenses for each scenario (baseline 0.33).
 
-## Setup
+## Running it
 
-Requires Python ≥ 3.11 and [uv](https://docs.astral.sh/uv/).
+Ask your coding agent (Claude Code, Codex, or similar) to run the experiment: operational instructions for agents are in [`AGENTS.md`](AGENTS.md). The one thing only you can provide is two API keys, which the agent will ask you to put in a local `.env` file:
 
-```bash
-uv sync
-cp .env.example .env    # then fill in both keys
-```
+- **Anthropic:** from https://console.anthropic.com → Settings → API Keys. API usage is billed to Console credits, separately from a Claude subscription.
+- **OpenRouter** (for Jev): from https://openrouter.ai/settings/keys.
 
-- `ANTHROPIC_API_KEY`: from https://console.anthropic.com → Settings → API Keys (billed to Console credits, separate from a Claude subscription).
-- `OPENROUTER_API_KEY`: from https://openrouter.ai/settings/keys.
+A full run takes about 30 minutes and costs roughly $25 in Opus usage; Jev's cost is negligible.
 
-## Run
+## What's where
 
-```bash
-uv run summon run      # 45 conversations, 8 in parallel → results/<lens>/<scenario>/<test>.json and .md
-uv run summon score    # 9 within-lens + 3 cross-lens Jev calls → results/**/judgment.json
-uv run summon report   # results/scores.csv and results/report.md
-```
-
-Add `--lens <name>` (repeatable) to limit any command to certain lenses; parallelism is `concurrency` in `config.yaml`. A full run takes about 30 minutes and costs roughly $25 in Opus usage (Jev's cost is negligible).
-
-Every command skips work that's already saved, so rerunning after a failure only fills the gaps. To redo a test, delete its `.json`, plus the `judgment.json` files that used it: `results/<lens>/<scenario>/judgment.json`, and for a D test also `results/cross-lens/<scenario>/judgment.json`. To start over, move or delete `results/`.
-
-## Files
-
-```
-experiments/
-├── 001-independent-lab.md …       # scenarios; add 004-<name>.md to add one
-└── <lens>/testA.md … testE.md     # one file per condition
-src/summon/                        # run.py, judge.py, report.py, cli.py
-```
-
-Each test file has the opening (with `{{SCENARIO}}` replaced by the scenario text) above the line `---- follow-up guidance ----`, and the questioner's guidance below it. The subject model never sees the guidance.
+- `spec.md`: the full design.
+- `experiments/`: the scenarios (`###-<name>.md`) and, per lens, the five test files. Each test file holds the opening prompt and the guidance for its follow-up questions.
+- `results-*/`: past runs, with every conversation in readable Markdown and a `report.md`.
+- `src/summon/`: the code.
 
 ## Results so far
 
