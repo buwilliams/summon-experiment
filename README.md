@@ -11,7 +11,7 @@ Five prompting **conditions**, compared on the same scenarios:
 | | Condition | What the opening does |
 |---|---|---|
 | A | Plain | The scenario only. |
-| B | Persona | Adds an expert identity ("a scientist by training…"). |
+| B | Persona | Adds the lens's identity ("a world-class philosopher of science"), without naming the method. |
 | C | Method named | Names the method ("Use the method of conjectures and refutations…"). |
 | D | Method enacted | Asks the questions a practitioner would ask, in the method's vocabulary. **The treatment.** |
 | E | Child lens | Same form as D, asked by a curious child. Control for "any structured prompt helps". |

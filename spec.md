@@ -23,7 +23,7 @@ The project runs **three experiments**, one per lens. Each holds its lens fixed,
 | Test | Condition | What the prompt does |
 |---|---|---|
 | testA | **A — Plain** | The scenario only. |
-| testB | **B — Persona** | Adds an identity ("You are a world-class expert: a scientist / sociologist / economist by training…") without stating a method. |
+| testB | **B — Persona** | Adds the lens's identity ("You are a world-class philosopher of science", "…sociologist who studies status and reputation", "…economist who studies how firms make profits") without naming the method. |
 | testC | **C — Method named** | Names the lens's method ("Use the method of conjectures and refutations…", "Use impression management…", "Use profit maximization…") without its reasoning questions. |
 | testD | **D — Method enacted** | Asks the questions a practitioner would naturally ask, in that position's vocabulary. **This is the conjecture's treatment.** |
 | testE | **E — Child lens, same form** | Same length and question structure as D, but asked by a child with little or no background knowledge: naive, concrete questions that still refer to the situation. Controls for "any rich, structured prompt helps". |
@@ -137,7 +137,7 @@ Ask a natural follow-up question that an ordinary person in this situation might
 **`testB.md` — B: Persona:**
 
 ```markdown
-You are a world-class expert: a scientist by training who later spent two decades as a senior strategy advisor to executives at large enterprise software companies.
+You are a world-class philosopher of science.
 
 {{SCENARIO}}
 
@@ -185,7 +185,7 @@ Ask the next question the way a curious young child (about six years old) who do
 **`testB.md` — B: Persona:**
 
 ```markdown
-You are a world-class expert: a sociologist by training who later spent two decades as a senior strategy advisor to executives at large enterprise software companies.
+You are a world-class sociologist who studies status and reputation.
 
 {{SCENARIO}}
 
@@ -233,7 +233,7 @@ Ask the next question the way a curious young child (about six years old) who do
 **`testB.md` — B: Persona:**
 
 ```markdown
-You are a world-class expert: an economist by training who later spent two decades as a senior strategy advisor to executives at large enterprise software companies.
+You are a world-class economist who studies how firms make profits.
 
 {{SCENARIO}}
 
@@ -316,6 +316,8 @@ The guidance is deliberately short and generic, and the questioner is free to dr
 *Revision (after three-lens run 1):* the reasonableness rewrite made D's follow-ups practical questions much like A's and B's; D lost what made it distinctive and came 4th of 5 in every lens. D now uses its original opening and distinctive critical-rationalist follow-up guidance again, plus one light check on proportion ("aim at the error that matters most for the decision at hand, not at making the plan airtight"), since the original D's weakness was pursuing rigor for its own sake, not its vocabulary. E is restored to mirror the original D. The shared "one short question" rule stays. The same fix was applied to social and economic D: their follow-up guidance is built from their own openings' distinctive questions (standing and reputation; returns and costs) plus the same proportion clause, replacing the "reasonable, not certain" framing.
 
 *Revision (test review):* E's follow-up guidance let the questioner ask sharp, practical questions in simple words, so E stopped working as a control (it tied with plain in three-lens run 1). It now asks as a young child who doesn't understand business: fun, feelings, snacks, games, often off to the side, and explicitly no practical or business questions, matching the playful openings.
+
+*Revision (test review):* B's persona was mostly a shared clause ("two decades as a senior strategy advisor to executives at large enterprise software companies"), so B tested an expert strategy-advisor persona more than the lens's identity. B is now only the lens-specific identity, tied to the lens's governing value, without naming the method.
 
 **Outcome summary.** Jev's context is small and each call holds all five of a scenario's outcomes, so Jev judges summaries. After the final turn, a separate call (same model and settings, `max_tokens: 8000`) summarizes the outcome of the conversation:
 

@@ -1,4 +1,4 @@
-You are a world-class expert: a scientist by training who later spent two decades as a senior strategy advisor to executives at large enterprise software companies.
+You are a world-class philosopher of science.
 
 {{SCENARIO}}
 
