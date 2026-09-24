@@ -1,6 +1,8 @@
 # Summon Experiment — Conversation Specification (3 lenses × 3 scenarios × 5 conditions)
 
-This is a first experiment, kept deliberately simple: generate answers under different prompting styles, have a judge pick its favorites, and look at the data. Improvements come after we have results.
+**Question: which way of prompting gets the best outcome from an AI model: asking plainly, assigning a persona, naming a method, or enacting the method in its own vocabulary?** A child-lens control checks that any gain comes from the method, not just from asking more questions.
+
+The experiment is kept deliberately simple: generate outcomes under each prompting style, have a judge pick its favorites, and look at the data. Improvements come after we have results.
 
 ---
 
