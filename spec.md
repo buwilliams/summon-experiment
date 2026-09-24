@@ -1,6 +1,6 @@
 # Summon Experiment — Conversation Specification (3 lenses × 3 scenarios × 5 conditions)
 
-**Question: which prompting style gets the best outcome from an AI model: asking plainly, assigning a persona, naming a method, or enacting the method in its own vocabulary?** A child-lens control checks that any gain comes from the method, not just from asking more questions.
+**Question: which prompting style performs best?** The styles are asking plainly, assigning a persona, naming a method, and enacting the method in its own vocabulary; "best" means the outcome a judge prefers. A child-lens control checks that any gain comes from the method, not just from asking more questions.
 
 The experiment is kept deliberately simple: generate outcomes under each prompting style, have a judge pick its favorites, and look at the data. Improvements come after we have results.
 
