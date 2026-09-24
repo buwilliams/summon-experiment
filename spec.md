@@ -157,10 +157,10 @@ Ask a follow-up question that asks the assistant to keep using the method of con
 ```markdown
 {{SCENARIO}}
 
-I don't need certainty; I want the most reasonable explanation we can act on now and correct as we learn. Treat each belief as a conjecture: what does each one claim is going on, and why? Whose values and goals is each one built around, and are they the ones that matter most here? What might both be leaving out that could change the outcome? Which assumption is most worth checking first, and what is a quick way to check it? And is there a better explanation that fits the same facts than either one?
+I don't want to know which view feels more plausible. I want to know which one survives criticism. Treat each belief as a conjecture: what does each one claim is actually going on, and why? If each were true, what would we expect to observe that we would not expect if the other were true? Where is each explanation easy to vary, so that it could accommodate almost any outcome? What is the cheapest test that could refute each one soon? And is there a third explanation that accounts for the same facts better than both?
 
 ---- follow-up guidance ----
-Ask one short follow-up question that a reasonable critical rationalist would ask next. Aim for reasonableness, not certainty: we will act on the best current explanation and correct it as we learn. Look for what the last answer leaves out that matters: whose values it is serving and whether they are the right ones, what could change the outcome that it hasn't considered, or the one assumption most worth checking first. Keep it brief and practical; don't ask for more rigor, proof, or procedure.
+Ask the follow-up question a critical rationalist would naturally ask next, in the language of conjecture and criticism: for example, what each explanation predicts that the other doesn't, where an explanation is easy to vary, what cheap test could refute it, or whether a better explanation fits the same facts. Build on the last answer. Keep the criticism proportionate: aim at the error that matters most for the decision at hand, not at making the plan airtight.
 ```
 
 **`testE.md` — E: Child lens, same form:**
@@ -168,7 +168,7 @@ Ask one short follow-up question that a reasonable critical rationalist would as
 ```markdown
 {{SCENARIO}}
 
-I don't need to be super sure; I just want a good idea we can try now and fix if it turns out wrong. Pretend each idea is a new toy: what does it do, and who gets to play with it? Which idea would make the people at work happy, and would anybody cry? Did everybody forget about something, like snacks or a place to play? Which part should we try first, and could we try it really fast, like before lunch? And is there a third idea everybody likes better, like a swing set for the whole office?
+I don't want to know which idea sounds more grown-up. I want to know which one is more fun. Pretend each idea is a new toy: what does it do, and who gets to play with it? If each one happened, would the people at work be happy or sad, and would anybody cry? Where is each idea kind of boring, so that nobody would want to hear about it at dinner? Does either idea come with snacks, or a place to play? And is there a third idea that everybody likes better, like a swing set for the whole office?
 
 ---- follow-up guidance ----
 Ask the follow-up question a curious child with little or no background knowledge would ask next: naive, concrete, sometimes off to the side, but still about the situation. Build on the last answer.
@@ -308,6 +308,8 @@ the question, nothing else.
 The guidance is deliberately short and generic, and the questioner is free to drift: we are testing model capability, not a fixed script. Follow-ups are minimal, quick questions for every condition.
 
 *Revision (conversation run 2):* D's opening and guidance were rewritten around reasonableness rather than certainty, following the view that epistemic positions are value-based and model-based: good criticism looks for what the current model leaves out and whose values set the frame, rather than demanding more rigor. In run 1 the questioner had pushed D toward ever-heavier validation procedures. E was rewritten to keep mirroring D, and the shared questioner prompt now asks for one short question.
+
+*Revision (after three-lens run 1):* the reasonableness rewrite made D's follow-ups practical questions much like A's and B's; D lost what made it distinctive and came 4th of 5 in every lens. D now uses its original opening and distinctive critical-rationalist follow-up guidance again, plus one light check on proportion ("aim at the error that matters most for the decision at hand, not at making the plan airtight"), since the original D's weakness was pursuing rigor for its own sake, not its vocabulary. E is restored to mirror the original D. The shared "one short question" rule stays.
 
 **Outcome summary.** Jev's context is small and each call holds all five of a scenario's outcomes, so Jev judges summaries. After the final turn, a separate call (same model and settings, `max_tokens: 8000`) summarizes the outcome of the conversation:
 
