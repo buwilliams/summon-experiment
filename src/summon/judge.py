@@ -16,9 +16,9 @@ QUESTION = "Which answer do you think is better?"
 CROSS_LENS = "cross-lens"
 
 
-def judgment_path(lens, scenario):
-    """lens is a lens name, or CROSS_LENS for the D-vs-D comparison."""
-    return RESULTS / lens / scenario / "judgment.json"
+def judgment_path(scenario, group):
+    """group is a lens name, or CROSS_LENS for the D-vs-D comparison."""
+    return RESULTS / scenario / group / "judgment.json"
 
 
 def call_jev(http, body, label):
@@ -78,14 +78,13 @@ def judge(http, cfg, scenario, options, seed_key, label):
 
 def jobs(lenses):
     """Yield (label, output path, scenario, options-or-missing, seed_key) for every judgment."""
-    for lens in lenses:
-        for s in SCENARIOS:
-            paths = {t: result_path(lens, s, t) for t in TESTS}
-            yield (f"{lens}/{s}", judgment_path(lens, s), s, paths, f"{lens}:{s}")
-    if len(lenses) > 1:
-        for s in SCENARIOS:
-            paths = {l: result_path(l, s, CROSS_LENS_TEST) for l in lenses}
-            yield (f"{CROSS_LENS}/{s}", judgment_path(CROSS_LENS, s), s, paths, f"{CROSS_LENS}:{s}")
+    for s in SCENARIOS:
+        for lens in lenses:
+            paths = {t: result_path(s, lens, t) for t in TESTS}
+            yield (f"{s}/{lens}", judgment_path(s, lens), s, paths, f"{lens}:{s}")
+        if len(lenses) > 1:
+            paths = {l: result_path(s, l, CROSS_LENS_TEST) for l in lenses}
+            yield (f"{s}/{CROSS_LENS}", judgment_path(s, CROSS_LENS), s, paths, f"{CROSS_LENS}:{s}")
 
 
 def score_one(http, cfg, label, out, scenario, paths, seed_key):

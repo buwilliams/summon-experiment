@@ -53,22 +53,26 @@ summon-experiment/
 ├── pyproject.toml
 ├── .env.example                     # ANTHROPIC_API_KEY=, OPENROUTER_API_KEY=
 ├── config.yaml                      # §8
-├── experiments/
-│   ├── 001-independent-lab.md       # scenarios: ###-<name>.md, run in numeric order
-│   ├── 002-legacy-rewrite.md
-│   ├── 003-churn-cause.md
-│   └── <lens>/                      # critical-rationalism, social, economic
-│       └── testA.md … testE.md      # the five conditions: opening + follow-up guidance
-├── results/
+├── experiments/                     # organized scenario > lens > test
+│   ├── 001-independent-lab/         # scenario: ###-<name>/, run in numeric order
+│   │   ├── scenario.md
+│   │   ├── critical-rationalism/    # lens
+│   │   │   └── testA.md … testE.md  # tests: the five conditions (opening + follow-up guidance)
+│   │   ├── social/testA.md … testE.md
+│   │   └── economic/testA.md … testE.md
+│   ├── 002-legacy-rewrite/…
+│   └── 003-churn-cause/…
+├── results/                         # same order: scenario > lens > test
 │   ├── scores.csv
 │   ├── report.md
-│   ├── <lens>/<scenario>/
-│   │   ├── testA.json               # conversation turns, outcome summary, usage
-│   │   ├── testA.md                 # readable copy of the conversation
-│   │   ├── …
-│   │   └── judgment.json            # Jev's scores for this lens/scenario's five tests
-│   └── cross-lens/<scenario>/
-│       └── judgment.json            # Jev's scores for the three lenses' D outcomes
+│   └── <scenario>/
+│       ├── <lens>/
+│       │   ├── testA.json           # conversation turns, outcome summary, usage
+│       │   ├── testA.md             # readable copy of the conversation
+│       │   ├── …
+│       │   └── judgment.json        # Jev's scores for this scenario/lens's five tests
+│       └── cross-lens/
+│           └── judgment.json        # Jev's scores for the three lenses' D outcomes
 └── src/summon/
     ├── cli.py
     ├── run.py                       # run conversations and summarize outcomes
@@ -82,7 +86,7 @@ summon-experiment/
 
 Each scenario has the same shape: a first-person situation plus **two rival beliefs about what is right**, ending with a question. None of the scenarios names an epistemic method, so the only difference between conditions is the test wrapper.
 
-### 3.1 `experiments/001-independent-lab.md`
+### 3.1 `experiments/001-independent-lab/scenario.md`
 
 ```markdown
 I just started working for a new company. It is a large organization that makes insurance software. They are churning customers and struggling to win new business. The CEO believes we can "turn the ship around" by working within the existing systems, procedures, and talent. He hired me to lead innovation and produce outsized results. I believe we need to create an innovation lab that is independent of the large organization to be successful. Which strategy is right?
@@ -90,13 +94,13 @@ I just started working for a new company. It is a large organization that makes 
 
 *(Minimal edit to the original: "He hired me innovation" → "He hired me to lead innovation", to fix a dropped word. Revert it if you want the original wording.)*
 
-### 3.2 `experiments/002-legacy-rewrite.md`
+### 3.2 `experiments/002-legacy-rewrite/scenario.md`
 
 ```markdown
 I lead engineering for a mid-sized company whose core product is a 20-year-old policy administration system for property and casualty insurers. It still works and it runs most of our revenue, but every new feature takes months, our best engineers keep leaving, and two competitors now market themselves as "cloud-native." Our CTO believes we must rewrite the platform from scratch on a modern stack over the next two years, because incremental fixes will never get us out of the hole. Our head of product believes we should modernize incrementally, carving off one capability at a time behind the existing system while continuing to ship features customers are asking for. Which strategy is right?
 ```
 
-### 3.3 `experiments/003-churn-cause.md`
+### 3.3 `experiments/003-churn-cause/scenario.md`
 
 ```markdown
 I run customer success at a company that sells claims-management software to regional insurance carriers. Over the last 18 months our annual churn has doubled. Our VP of Product believes customers are leaving because of product gaps: competitors have better analytics and AI features, so we need to accelerate the roadmap. Our VP of Services believes customers are leaving because of a painful implementation and support experience: our implementations run long, and customers never get to full value, so we need to fix onboarding and service before building more features. Which belief is right, and what should we do?
@@ -113,11 +117,11 @@ Design notes (not part of the scenario files):
 
 Each test file has two parts, separated by the line `---- follow-up guidance ----`. Above it is the opening template: `{{SCENARIO}}` is replaced with the scenario file's contents (trimmed), and the result is the **first user message**. Below it is the guidance given to the questioner for the follow-up turns (§5); it is never shown to the subject model. There is **no system prompt** in any condition.
 
-Each test exists exactly once per lens, so the tests are the control and the scenario is the only variable: every scenario is run through the same files. `testA.md` is identical in every lens.
+The tests are the control and the scenario is the only variable. Each scenario folder holds a copy of every lens's tests so the files follow scenario > lens > test, but the copies must be identical: `summon run` checks this and refuses to start if any lens's test file differs between scenarios. To change a test, change it in every scenario. `testA.md` is also identical in every lens.
 
 In every lens, D's and E's openings are written to within ±10% of each other in word count (excluding `{{SCENARIO}}`).
 
-### 4.1 Lens: `critical-rationalism` — `experiments/critical-rationalism/`
+### 4.1 Lens: `critical-rationalism` — `experiments/<scenario>/critical-rationalism/`
 
 The child lens asks from a position of little or no background knowledge: concrete, naive, sometimes off-to-the-side questions that still refer to the situation. E mirrors D sentence by sentence, swapping the practitioner's concepts for a child's. The wording avoids details specific to any one scenario, so the same wrapper fits all three.
 
@@ -174,7 +178,7 @@ I don't want to know which idea sounds more grown-up. I want to know which one i
 Ask the follow-up question a curious child with little or no background knowledge would ask next: naive, concrete, sometimes off to the side, but still about the situation. Build on the last answer.
 ```
 
-### 4.2 Lens: `social` — `experiments/social/`
+### 4.2 Lens: `social` — `experiments/<scenario>/social/`
 
 **`testA.md` — A: Plain:** identical to the critical-rationalism `testA.md`.
 
@@ -222,7 +226,7 @@ I want to know which idea makes more people want to be your friend. Think about 
 Ask the follow-up question a curious child with little or no background knowledge would ask next: naive, concrete, sometimes off to the side, but still about the situation. Build on the last answer.
 ```
 
-### 4.3 Lens: `economic` — `experiments/economic/`
+### 4.3 Lens: `economic` — `experiments/<scenario>/economic/`
 
 **`testA.md` — A: Plain:** identical to the critical-rationalism `testA.md`.
 
@@ -330,7 +334,7 @@ recommendation or add ideas it does not contain.
 </conversation>
 ```
 
-**Saving.** Write `results/<lens>/<scenario>/<test>.json` with every turn (user message, answer, who wrote the question, `stop_reason`, usage), the final answer, the outcome summary, model IDs, and timestamps. Also write a readable `<test>.md` with the full conversation and summary.
+**Saving.** Write `results/<scenario>/<lens>/<test>.json` with every turn (user message, answer, who wrote the question, `stop_reason`, usage), the final answer, the outcome summary, model IDs, and timestamps. Also write a readable `<test>.md` with the full conversation and summary.
 
 **Rerunning.** `summon run` skips any test whose `.json` already exists. To redo a test, delete its file and run again. To start over, delete `results/`.
 
@@ -343,7 +347,7 @@ recommendation or add ideas it does not contain.
 `summon score` makes two kinds of Jev calls, in parallel:
 
 - **Within each lens:** one call per lens and scenario comparing that lens's five outcomes (A–E): 9 calls.
-- **Across lenses:** one call per scenario comparing the D (method enacted) outcomes of the three lenses: 3 calls, saved under `results/cross-lens/<scenario>/`.
+- **Across lenses:** one call per scenario comparing the D (method enacted) outcomes of the three lenses: 3 calls, saved under `results/<scenario>/cross-lens/`.
 
 A comparison runs only when all of its outcomes exist. Both use the same request below, with as many answers as there are options (5 within a lens, 3 across lenses).
 
@@ -390,10 +394,10 @@ If the probabilities are missing, don't cover every option, or don't sum to abou
 
 `summon report` writes:
 
-- `results/scores.csv`: one row per comparison/scenario/option with its preference score (45 rows within lenses + 9 across lenses).
-- `results/report.md` with:
-  1. **Across lenses:** each lens's mean D score across the three scenarios, ranked, then one table per scenario.
-  2. **Per lens:** each condition's mean score across the three scenarios, ranked, then one table per scenario, with Jev's top choice and confidence.
+- `results/scores.csv`: one row per scenario/comparison/option with its preference score (45 rows within lenses + 9 across lenses).
+- `results/report.md`, organized scenario > lens > test:
+  1. **Overall:** each condition's average across all within-lens comparisons, with wins and per-lens averages, and each lens's average D score across lenses.
+  2. **Per scenario:** a table for each lens (A–E, with Jev's top choice and confidence), then the cross-lens table.
   3. **Notes:** any comparisons missing because tests failed, and the mean score at each display position relative to baseline, to show whether position in the list influenced Jev.
 
 Equal scores share a rank. Every scenario counts equally in the averages.

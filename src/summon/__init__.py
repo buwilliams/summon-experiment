@@ -23,20 +23,43 @@ def log(*parts):
         print(*parts, flush=True)
 
 
-def scenario_files():
-    """Map scenario name -> file, from experiments/###-<name>.md, in numeric order."""
-    files = sorted(EXPERIMENTS.glob("[0-9][0-9][0-9]-*.md"))
-    return {f.stem.split("-", 1)[1]: f for f in files}
+def scenario_dirs():
+    """Map scenario name -> folder, from experiments/###-<name>/, in numeric order."""
+    dirs = sorted(d for d in EXPERIMENTS.glob("[0-9][0-9][0-9]-*") if d.is_dir())
+    return {d.name.split("-", 1)[1]: d for d in dirs}
 
 
-def lens_dirs():
-    """Each subfolder of experiments/ holding testA–E.md is a lens (one experiment)."""
-    return sorted(d.name for d in EXPERIMENTS.iterdir()
-                  if d.is_dir() and all((d / f"{t}.md").exists() for t in TESTS))
+def lens_names():
+    """Lenses are the subfolders of each scenario that hold testA–E.md."""
+    found = set()
+    for d in scenario_dirs().values():
+        found |= {l.name for l in d.iterdir()
+                  if l.is_dir() and all((l / f"{t}.md").exists() for t in TESTS)}
+    return sorted(found)
 
 
-SCENARIOS = list(scenario_files())
-LENSES = lens_dirs()
+SCENARIOS = list(scenario_dirs())
+LENSES = lens_names()
+
+
+def check_tests_identical():
+    """The tests are the control: each lens's test files must be identical in every
+    scenario. Returns a list of problems (empty if all copies match)."""
+    problems = []
+    dirs = scenario_dirs()
+    for lens in LENSES:
+        for test in TESTS:
+            versions = {}
+            for name, d in dirs.items():
+                f = d / lens / f"{test}.md"
+                if not f.exists():
+                    problems.append(f"missing {f}")
+                    continue
+                versions.setdefault(f.read_text(), []).append(name)
+            if len(versions) > 1:
+                groups = "; ".join(", ".join(v) for v in versions.values())
+                problems.append(f"{lens}/{test}.md differs between scenarios ({groups})")
+    return problems
 
 
 def load_config(path="config.yaml"):
@@ -52,15 +75,15 @@ def require_env(name):
 
 
 def scenario_text(scenario):
-    return scenario_files()[scenario].read_text().strip()
+    return (scenario_dirs()[scenario] / "scenario.md").read_text().strip()
 
 
-def template_path(lens, test):
-    return EXPERIMENTS / lens / f"{test}.md"
+def template_path(scenario, lens, test):
+    return scenario_dirs()[scenario] / lens / f"{test}.md"
 
 
-def result_path(lens, scenario, test):
-    return RESULTS / lens / scenario / f"{test}.json"
+def result_path(scenario, lens, test):
+    return RESULTS / scenario / lens / f"{test}.json"
 
 
 def read_json(path):

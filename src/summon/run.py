@@ -6,8 +6,8 @@ from datetime import datetime, timezone
 import anthropic
 
 from . import (
-    LENSES, SCENARIOS, TESTS, Fatal, log, require_env, result_path,
-    scenario_text, template_path, with_retries, write_json,
+    LENSES, SCENARIOS, TESTS, Fatal, check_tests_identical, log, require_env,
+    result_path, scenario_text, template_path, with_retries, write_json,
 )
 
 GUIDANCE_MARKER = "---- follow-up guidance ----"
@@ -43,12 +43,12 @@ recommendation or add ideas it does not contain.
 </conversation>"""
 
 
-def load_test(lens, scenario, test):
+def load_test(scenario, lens, test):
     """Return (opening message, follow-up guidance) for a test on a scenario."""
-    text = template_path(lens, test).read_text()
-    opening, _, guidance = text.partition(GUIDANCE_MARKER)
+    path = template_path(scenario, lens, test)
+    opening, _, guidance = path.read_text().partition(GUIDANCE_MARKER)
     if not guidance.strip():
-        raise SystemExit(f"{template_path(lens, test)} has no '{GUIDANCE_MARKER}' section")
+        raise SystemExit(f"{path} has no '{GUIDANCE_MARKER}' section")
     return opening.replace("{{SCENARIO}}", scenario_text(scenario)).strip(), guidance.strip()
 
 
@@ -97,9 +97,9 @@ def transcript(turns):
     return "\n\n".join(f"User: {t['user']}\n\nAssistant: {t['assistant']}" for t in turns)
 
 
-def run_test(client, cfg, lens, scenario, test):
-    label = f"{lens}/{scenario}/{test}"
-    opening, guidance = load_test(lens, scenario, test)
+def run_test(client, cfg, scenario, lens, test):
+    label = f"{scenario}/{lens}/{test}"
+    opening, guidance = load_test(scenario, lens, test)
     started = now()
     messages = []
     turns = []
@@ -138,8 +138,8 @@ def run_test(client, cfg, lens, scenario, test):
     )
     record = {
         "test_id": label,
-        "lens": lens,
         "scenario": scenario,
+        "lens": lens,
         "test": test,
         "guidance": guidance,
         "turns": turns,
@@ -151,7 +151,7 @@ def run_test(client, cfg, lens, scenario, test):
         "started_at": started,
         "ended_at": now(),
     }
-    path = result_path(lens, scenario, test)
+    path = result_path(scenario, lens, test)
     write_json(path, record)
     body = "\n\n".join(
         f"## Turn {i}\n\n**User:** {t['user']}\n\n**Assistant:**\n\n{t['assistant']}"
@@ -166,9 +166,13 @@ def run_test(client, cfg, lens, scenario, test):
 
 def main(cfg, lenses=None):
     require_env("ANTHROPIC_API_KEY")
+    problems = check_tests_identical()
+    if problems:
+        raise SystemExit("Test files must be identical across scenarios (they are the control):\n  "
+                         + "\n  ".join(problems))
     # Retries are handled by with_retries so a failed stream restarts cleanly.
     client = anthropic.Anthropic(max_retries=0)
-    cells = [(l, s, t) for l in (lenses or LENSES) for s in SCENARIOS for t in TESTS]
+    cells = [(s, l, t) for s in SCENARIOS for l in (lenses or LENSES) for t in TESTS]
     todo = [c for c in cells if not result_path(*c).exists()]
     workers = cfg.get("concurrency", 8)
     log(f"{len(cells) - len(todo)} of {len(cells)} tests already done; "
