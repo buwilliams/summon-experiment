@@ -175,7 +175,7 @@ Ask the follow-up question a critical rationalist would naturally ask next, in t
 I don't want to know which idea sounds more grown-up. I want to know which one is more fun. Pretend each idea is a new toy: what does it do, and who gets to play with it? If each one happened, would the people at work be happy or sad, and would anybody cry? Where is each idea kind of boring, so that nobody would want to hear about it at dinner? Does either idea come with snacks, or a place to play? And is there a third idea that everybody likes better, like a swing set for the whole office?
 
 ---- follow-up guidance ----
-Ask the follow-up question a curious child with little or no background knowledge would ask next: naive, concrete, sometimes off to the side, but still about the situation. Build on the last answer.
+Ask the next question the way a curious young child (about six years old) who doesn't understand business would, reacting to something in the last answer. Ask about fun, feelings, snacks, games, pets, or playing, and sometimes wander off to the side, like "Does the new team get a treehouse?" or "Is the boss nice?" Keep it short and childlike. Don't ask practical or business questions.
 ```
 
 ### 4.2 Lens: `social` — `experiments/<scenario>/social/`
@@ -223,7 +223,7 @@ Ask the follow-up question someone skilled at impression management would natura
 I want to know which idea makes more people want to be your friend. Think about how each idea would look to kids at work and kids outside. Who gets a gold star, and who gets in trouble or says sorry? If each idea happened, would the boss, the helpers, the customers, and everybody's moms think it was cool? Where might wearing a cape or being loud matter more than doing chores? Who would sit together at lunch because of each idea? And is there a third idea where everybody gets to play and nobody feels left out?
 
 ---- follow-up guidance ----
-Ask the follow-up question a curious child with little or no background knowledge would ask next: naive, concrete, sometimes off to the side, but still about the situation. Build on the last answer.
+Ask the next question the way a curious young child (about six years old) who doesn't understand business would, reacting to something in the last answer. Ask about fun, feelings, snacks, games, pets, or playing, and sometimes wander off to the side, like "Does the new team get a treehouse?" or "Is the boss nice?" Keep it short and childlike. Don't ask practical or business questions.
 ```
 
 ### 4.3 Lens: `economic` — `experiments/<scenario>/economic/`
@@ -271,7 +271,7 @@ Ask the follow-up question a profit-minded operator would naturally ask next, in
 I want to know which idea gets you more stuff, like a lemonade stand. Follow the piggy bank through each idea. How many cookies would it get you, and how much allowance would you spend first? If each idea happened, how long until the treats come, and could a big dog eat them all? Where could you keep spending money and still not get more candy? Who would hold the piggy bank, count the coins, and say when to stop buying things? And is there a third idea that gets even more treats without breaking the piggy bank?
 
 ---- follow-up guidance ----
-Ask the follow-up question a curious child with little or no background knowledge would ask next: naive, concrete, sometimes off to the side, but still about the situation. Build on the last answer.
+Ask the next question the way a curious young child (about six years old) who doesn't understand business would, reacting to something in the last answer. Ask about fun, feelings, snacks, games, pets, or playing, and sometimes wander off to the side, like "Does the new team get a treehouse?" or "Is the boss nice?" Keep it short and childlike. Don't ask practical or business questions.
 ```
 
 ---
@@ -314,6 +314,8 @@ The guidance is deliberately short and generic, and the questioner is free to dr
 *Revision (conversation run 2):* D's opening and guidance were rewritten around reasonableness rather than certainty, following the view that epistemic positions are value-based and model-based: good criticism looks for what the current model leaves out and whose values set the frame, rather than demanding more rigor. In run 1 the questioner had pushed D toward ever-heavier validation procedures. E was rewritten to keep mirroring D, and the shared questioner prompt now asks for one short question.
 
 *Revision (after three-lens run 1):* the reasonableness rewrite made D's follow-ups practical questions much like A's and B's; D lost what made it distinctive and came 4th of 5 in every lens. D now uses its original opening and distinctive critical-rationalist follow-up guidance again, plus one light check on proportion ("aim at the error that matters most for the decision at hand, not at making the plan airtight"), since the original D's weakness was pursuing rigor for its own sake, not its vocabulary. E is restored to mirror the original D. The shared "one short question" rule stays. The same fix was applied to social and economic D: their follow-up guidance is built from their own openings' distinctive questions (standing and reputation; returns and costs) plus the same proportion clause, replacing the "reasonable, not certain" framing.
+
+*Revision (test review):* E's follow-up guidance let the questioner ask sharp, practical questions in simple words, so E stopped working as a control (it tied with plain in three-lens run 1). It now asks as a young child who doesn't understand business: fun, feelings, snacks, games, often off to the side, and explicitly no practical or business questions, matching the playful openings.
 
 **Outcome summary.** Jev's context is small and each call holds all five of a scenario's outcomes, so Jev judges summaries. After the final turn, a separate call (same model and settings, `max_tokens: 8000`) summarizes the outcome of the conversation:
 
