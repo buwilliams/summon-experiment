@@ -33,6 +33,66 @@ Each condition is run through three **lenses**, one experiment each:
 - **Within a lens:** A–E for each scenario (baseline 0.20).
 - **Across lenses:** the D outcomes of the three lenses for each scenario (baseline 0.33).
 
+## Results
+
+From one full run (`results-three-lens-run1/`). Each number is Jev's preference score: its probability that an outcome is the best of those compared. **Bold** marks the top score in each column.
+
+### Individual experiments
+
+Five outcomes compared per scenario, so 0.20 means no preference.
+
+**critical-rationalism**
+
+| Condition | independent-lab | legacy-rewrite | churn-cause | Average |
+|---|---|---|---|---|
+| A Plain | 0.18 | **0.44** | 0.26 | **0.29** |
+| B Persona | 0.25 | 0.02 | **0.55** | 0.27 |
+| C Method named | 0.01 | 0.09 | 0.06 | 0.05 |
+| D Method enacted | 0.10 | 0.18 | 0.04 | 0.11 |
+| E Child lens | **0.46** | 0.27 | 0.08 | 0.27 |
+
+**social**
+
+| Condition | independent-lab | legacy-rewrite | churn-cause | Average |
+|---|---|---|---|---|
+| A Plain | 0.10 | 0.29 | **0.37** | **0.25** |
+| B Persona | **0.41** | 0.14 | 0.18 | 0.24 |
+| C Method named | 0.10 | 0.03 | 0.22 | 0.12 |
+| D Method enacted | 0.15 | 0.04 | 0.22 | 0.14 |
+| E Child lens | 0.24 | **0.50** | 0.01 | 0.25 |
+
+**economic**
+
+| Condition | independent-lab | legacy-rewrite | churn-cause | Average |
+|---|---|---|---|---|
+| A Plain | 0.06 | 0.08 | 0.34 | 0.16 |
+| B Persona | **0.31** | **0.36** | **0.48** | **0.38** |
+| C Method named | 0.25 | 0.04 | 0.06 | 0.12 |
+| D Method enacted | 0.11 | 0.20 | 0.10 | 0.14 |
+| E Child lens | 0.27 | 0.32 | 0.02 | 0.20 |
+
+### Cumulative
+
+**All nine comparisons** (3 lenses × 3 scenarios), each weighted equally:
+
+| Rank | Condition | Average score | Comparisons won | critical-rationalism | social | economic |
+|---|---|---|---|---|---|---|
+| 1 | B Persona | **0.30** | 5 of 9 | 0.27 | 0.24 | 0.38 |
+| 2 | E Child lens | 0.24 | 2 of 9 | 0.27 | 0.25 | 0.20 |
+| 3 | A Plain | 0.24 | 2 of 9 | 0.29 | 0.25 | 0.16 |
+| 4 | D Method enacted | 0.13 | 0 of 9 | 0.11 | 0.14 | 0.14 |
+| 5 | C Method named | 0.10 | 0 of 9 | 0.05 | 0.12 | 0.12 |
+
+**Across lenses:** the method-enacted (D) outcome from each lens, compared head to head (3 outcomes per scenario, so 0.33 means no preference):
+
+| Lens | independent-lab | legacy-rewrite | churn-cause | Average |
+|---|---|---|---|---|
+| social | **0.63** | 0.06 | **0.47** | 0.39 |
+| economic | 0.13 | **0.71** | 0.32 | 0.39 |
+| critical-rationalism | 0.24 | 0.23 | 0.21 | 0.23 |
+
+**Reading these:** each cell comes from one conversation and one Jev call, and earlier runs showed single runs can reorder. The full conversations are in `results-three-lens-run1/<lens>/<scenario>/<test>.md` and Jev's raw judgments in the `judgment.json` files.
+
 ## Running it
 
 Ask your coding agent (Claude Code, Codex, or similar) to run the experiment: operational instructions for agents are in [`AGENTS.md`](AGENTS.md). The one thing only you can provide is two API keys, which the agent will ask you to put in a local `.env` file:
@@ -46,17 +106,6 @@ A full run takes about 30 minutes and costs roughly $25 in Opus usage; Jev's cos
 
 - `spec.md`: the full design.
 - `experiments/`: the scenarios (`###-<name>.md`) and, per lens, the five test files. Each test file holds the opening prompt and the guidance for its follow-up questions.
-- `results-*/`: past runs, with every conversation in readable Markdown and a `report.md`.
+- `results-three-lens-run1/`: the run reported above, with every conversation in readable Markdown and a `report.md`.
+- `results-oneshot-run1/`, `results-oneshot-run2/`, `results-conversation-run1/`, `results-archive/`: earlier runs from previous versions of the design (one-shot prompts, a single lens, the original D). Useful for historical comparison, but not directly comparable with the current results.
 - `src/summon/`: the code.
-
-## Results so far
-
-| Folder | What it is | Headline |
-|---|---|---|
-| `results-oneshot-run1/`, `results-oneshot-run2/` | Critical-rationalism, single prompt, no follow-ups | Rankings didn't replicate between identical runs; only E (last) was stable. |
-| `results-conversation-run1/` | Critical-rationalism, conversations (original D) | D won 2 of 3 scenarios decisively (churn-cause, legacy-rewrite) but lost independent-lab, where its questioner over-pursued rigor. |
-| `results-archive/` | An early 3-lens one-shot run whose lens setup was later reorganized | Kept for reference. |
-
-After conversation run 1, D was revised toward reasonableness rather than certainty (see `spec.md` §5). The current three-lens run uses that revision.
-
-Each result folder holds the full conversations (`<test>.md`), Jev's judgments, and a `report.md`.

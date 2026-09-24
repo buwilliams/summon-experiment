@@ -1,0 +1,423 @@
+# social/churn-cause/testC
+
+Model: claude-opus-5-5 · 2026-09-24T14:58:15.043952+00:00
+
+## Turn 1
+
+**User:** Use impression management to answer the following.
+
+I run customer success at a company that sells claims-management software to regional insurance carriers. Over the last 18 months our annual churn has doubled. Our VP of Product believes customers are leaving because of product gaps: competitors have better analytics and AI features, so we need to accelerate the roadmap. Our VP of Services believes customers are leaving because of a painful implementation and support experience: our implementations run long, and customers never get to full value, so we need to fix onboarding and service before building more features. Which belief is right, and what should we do?
+
+**Assistant:**
+
+# Using Impression Management to Diagnose Your Churn
+
+Impression management is the idea that people and organizations shape how they are perceived, choosing the explanations that protect their standing. I'll use it as a lens on your problem. It won't tell you which VP is right, but it does tell you whose evidence to trust, what data will settle the question, and one intervention you might be missing.
+
+## 1. Everyone's explanation is partly a performance
+
+**Customers.** When a carrier leaves, its stated reason is a story told to several audiences: you, their CFO, their board, and their own team. "Your competitor has better AI and analytics" is the ideal exit story because:
+- It blames the market, not the buyer.
+- It's defensible to leadership as a forward-looking upgrade rather than admitting a failed project.
+- It's polite to you, and far less awkward than "your implementation dragged on and your support team wore us down."
+
+The alternative truth, "we never got it working," implicates the champion who picked you and ran the rollout. Few people volunteer that.
+
+**Prediction:** exit surveys and renewal conversations will over-report product gaps and under-report adoption failure. If the VP of Product's case rests mainly on what churned customers *said*, discount it.
+
+**Your VPs.** Both narratives are self-protective, in understandable ways:
+- **VP of Product:** "Competitors moved faster" frames churn as a market shift, not flawed building, and argues for more roadmap investment.
+- **VP of Services:** "Customers never reach full value" frames churn as a process and resourcing problem. It could also quietly shift blame to product complexity.
+
+Neither is being dishonest. Each is offering the explanation that preserves their function's competence.
+
+**You.** Churn is your metric, and both stories let CS off the hook. That's worth acknowledging openly. Doing so makes you the credible, neutral arbiter.
+
+## 2. How to find the truth: look at behavior, not stated reasons
+
+Since stated reasons are managed impressions, rely on behavioral data that's hard to perform.
+
+| Evidence | Supports Services | Supports Product |
+|---|---|---|
+| Implementation duration of churned vs. retained accounts | Churned accounts had much longer implementations | No meaningful difference |
+| Usage depth before churn | Low adoption; existing analytics features barely touched | Heavy, mature usage, then departure |
+| Timing of churn | Clustered at first renewal | Spread across tenured accounts |
+| **New-logo win rate** | Stable (prospects haven't experienced your onboarding) | Falling, with losses to competitors on AI/analytics |
+| What customers actually use at the competitor | Mostly the same core workflows | The specific features you lack |
+
+**The single best discriminator is the new-logo win rate.** Prospects judge you only on product and demos, never on implementation. If you're winning new deals at historic rates but losing customers, the problem is post-sale. If you're losing both, the product gap is real.
+
+**Run exit research differently:**
+- Use a neutral third party. Customers will be candid with them in a way they won't be with you.
+- Ask about the decision's history, not its reasons. Useful questions include: "When did you first consider leaving?", "Who raised it?", and "What was happening with the rollout then?" People manage their stated reasons, but they are less guarded about the timeline.
+- Interview end users and admins, not just executive sponsors. Sponsors have the most face to save.
+
+## 3. The likely answer: both, in sequence
+
+The most common pattern in cases like yours: implementation friction means customers never reach value, and competitors' AI demos then look like the fix. The feature gap becomes the *story*, while the adoption failure is the *cause*. A carrier using 30% of your product can't honestly say it outgrew you, but it can easily believe a competitor's AI will solve what your rollout didn't.
+
+If the data shows that pattern, fix onboarding and time-to-value first. New features shipped into a failing adoption process will just be more unused features. If the data shows strong adoption *and* falling win rates, the VP of Product is right and the roadmap needs to accelerate.
+
+## 4. An intervention impression management suggests directly
+
+Renewals are decided by a champion who must justify you internally. Churn often happens not because the product failed, but because the champion has no success story to tell upward.
+
+So give them one:
+- Build ROI-focused business reviews with concrete numbers: cycle time, leakage, adjuster productivity.
+- Package those numbers as something the champion can take to their CFO.
+- Make your champion look smart for having chosen you.
+
+This is cheap, fast, and helps regardless of which VP is right.
+
+## 5. Manage the internal impressions too
+
+When you present findings, frame the outcome as a **sequencing decision** ("stabilize value delivery, then accelerate differentiation") rather than a verdict naming a winner and a loser. Then give both VPs a shared metric they're jointly accountable for, such as **time-to-first-value** or **adoption depth at 12 months**. That replaces dueling narratives with a common scoreboard, and neither leader has to lose face to get the company moving.
+
+**Bottom line:** Don't pick a belief. Run a four-to-six-week diagnostic built on behavioral evidence. My prior, based on how exit stories get managed, leans toward the Services explanation being the root cause, but let the win-rate and adoption data decide.
+
+## Turn 2
+
+**User:** Staying with impression management, how should I present the diagnostic plan to our CEO so it doesn't look like I'm dodging responsibility for the churn numbers myself?
+
+**Assistant:**
+
+# Presenting the Diagnostic Plan Without Looking Like You're Dodging
+
+The core risk is that a diagnostic plan from the person who owns churn can read as a delay tactic: "let's study it" instead of "here's what I'm doing." Impression management research suggests that when your performance is in question, **accounts** (excuses and justifications) damage credibility, while **acknowledgments** plus visible action restore it. So your presentation should do the opposite of what a defensive person would do.
+
+## 1. Own the number in your first sentence
+
+Don't open with context, market conditions, or the two VPs' theories. Open with ownership:
+
+> "Churn has doubled on my watch. I own that number, and I want to walk you through what I think is driving it and what I'm doing about it."
+
+This matters because the CEO is listening for whether you'll deflect. Answering that question immediately frees them to hear the rest on its merits. If you delay ownership until after the analysis, everything before it sounds like groundwork for an excuse.
+
+## 2. Implicate your own function before anyone else's
+
+The most credible statements are ones that cut against the speaker's interest. Before you discuss product gaps or implementation, name what CS could have done better. Possible admissions, if they're true:
+
+- "We didn't have an early-warning system. Most churned accounts showed low adoption months before renewal, and we didn't act on it."
+- "Our exit process captured stated reasons, not real ones, so we've been feeding leadership misleading data."
+- "We weren't equipping champions with ROI stories they could take to their CFOs."
+
+This does two things. It shows you're not using the diagnostic to shield yourself, and it earns you the standing to later say uncomfortable things about Product or Services. Once you've criticized your own team first, criticism of others reads as analysis rather than blame-shifting.
+
+Only admit what's real. A manufactured mea culpa is its own form of impression management, and CEOs tend to detect it.
+
+## 3. Frame the diagnostic as a decision tool with a deadline
+
+"We need to study this" sounds like stalling. "We're about to make a large resource decision on contested evidence, and here's how we'll settle it in five weeks" sounds like rigor.
+
+Make the stakes concrete:
+
+> "We're choosing between accelerating the roadmap and rebuilding onboarding. Both are expensive. If we pick wrong, we'll spend a year and still churn. I can give you a clear answer by [specific date]."
+
+Commit to:
+- **A fixed end date,** ideally four to six weeks out.
+- **A pre-stated decision rule,** for example: "If churned accounts show low adoption and new-logo win rates are stable, we prioritize onboarding. If adoption was strong and win rates are falling, we accelerate product."
+
+A pre-committed decision rule signals you're not steering toward a convenient conclusion. It also protects you later, since the outcome follows from criteria the CEO agreed to in advance.
+
+## 4. Show action that doesn't wait for the diagnosis
+
+The biggest tell of a dodge is "no action until the study finishes." Pair the diagnostic with things you're doing now that help no matter which VP is right:
+
+- **At-risk account triage:** identifying the accounts renewing in the next two quarters with low adoption and assigning recovery plans this week.
+- **Champion ROI packages:** building business reviews that give sponsors a defensible success story for their CFO.
+- **Honest exit research:** switching to third-party interviews immediately. That improves the diagnostic and your ongoing data.
+
+This turns your message from "wait for my analysis" into "I'm working the problem on two tracks."
+
+## 5. Be even-handed about the VPs
+
+The CEO will be watching whether you're taking sides. If you appear aligned with Services (whose theory also shifts attention away from CS), you'll look self-interested.
+
+- State each VP's theory in its strongest form, the way each would want it stated.
+- Say plainly that both theories happen to exonerate CS, which is exactly why you designed a test that doesn't depend on anyone's stated reasons, including yours.
+- Present your own prior tentatively: "My hunch leans toward implementation, but I've been wrong before, and the win-rate data could easily prove the product gap is real."
+
+Holding your prior loosely makes you look like the person seeking truth rather than a verdict.
+
+## 6. Give the CEO something to report upward
+
+Your CEO has their own audience: the board, investors, possibly a PE sponsor. Help them manage their impressions too. End with a crisp summary they can repeat:
+
+> "Churn doubled. We've identified that our exit data was unreliable, launched a five-week diagnostic with a clear decision rule, and started immediate recovery work on at-risk renewals. We'll have a resourcing recommendation by [date]."
+
+If your CEO can tell a confident story upward, they'll see you as part of the solution rather than the source of the problem.
+
+## A Suggested Structure
+
+1. **Ownership** (30 seconds): "I own this number."
+2. **What CS got wrong** (2 minutes): specific, real admissions.
+3. **The contested question** (2 minutes): both VP theories stated fairly, and why stated reasons can't settle it.
+4. **The diagnostic** (3 minutes): method, deadline, pre-committed decision rule.
+5. **Immediate actions** (2 minutes): what's happening this week regardless.
+6. **The summary line** (30 seconds): the story the CEO can take to the board.
+
+## One Honest Caveat
+
+Impression management only works durably when it reflects substance. If the diagnostic reveals that CS was a significant contributor, perhaps because renewal management was weak or risk signals were ignored, the credibility you build now depends on reporting that just as plainly. The strongest position isn't "it wasn't me." It's being known as the person who tells the CEO the truth even when it's unflattering. That reputation will outlast this churn cycle.
+
+## Turn 3
+
+**User:** Still through the impression management lens, how do I get both VPs to buy into the diagnostic before the CEO meeting, so neither feels ambushed or set up to lose?
+
+**Assistant:**
+
+# Getting Both VPs to Buy In Before the CEO Meeting
+
+Here the problem is **face**. Each VP has publicly staked out a position. A diagnostic that could prove one of them wrong in front of the CEO is a threat to their standing, not just a neutral test. People under face threat resist, lobby, or undermine. So your job is to make the diagnostic something each VP can *support without risk*, and ideally something they helped build.
+
+## 1. Meet each VP one-on-one, before any group conversation
+
+Group settings force people to defend their positions for an audience. Private conversations let them be candid about doubts without losing face.
+
+Sequence matters too. Whoever hears second may feel the first person got to shape the plan. Either meet them back-to-back on the same day, or tell each one explicitly: "I'm having this same conversation with [the other VP] this week. Neither of you is getting a different version."
+
+Never let either VP hear about the diagnostic from the CEO first. That's the definition of an ambush.
+
+## 2. Open with your own exposure, not their theory
+
+Use the same move that works with the CEO. Start by putting yourself on the line:
+
+> "Churn is my number, and I'm going to own it with the CEO. Honestly, both your theories happen to let CS off the hook, so I don't trust myself to be the judge. I want a test none of us can spin, including me."
+
+This defuses the suspicion that you're building a case against them. It positions the diagnostic as protection against *your* bias, which makes it much easier for them to accept protection against theirs.
+
+## 3. State their theory better than they would
+
+Before asking for anything, show you've genuinely understood their view. Lay out their position in its strongest form, then ask, "Did I get that right? What am I missing?"
+
+People are far more open to testing a belief once they feel it's been taken seriously. It also signals that the test is designed to find out *whether* they're right, not to prove they're wrong.
+
+## 4. Let each VP design part of the test
+
+This is the most important step. People defend conclusions they helped reach and attack conclusions imposed on them. Ask each VP:
+
+> "What evidence would convince you that you're right? And, harder question, what would convince you the other theory is right?"
+
+Build their answers into the diagnostic:
+- **VP of Product** will likely suggest win-loss data on new deals, competitor feature comparisons, and whether churned customers actually use AI and analytics at the new vendor. All good tests. Include them.
+- **VP of Services** will likely suggest implementation duration, time-to-first-value, and adoption depth before churn. Also good. Include them.
+
+Then show both VPs the combined design. Each should see their own fingerprints on it. If the result goes against them later, they're arguing against a method they endorsed.
+
+## 5. Agree on the decision rule privately, before any data exists
+
+Get each VP to commit to the criteria while the outcome is still unknown. At that point, agreeing costs them nothing because they expect to win.
+
+> "If churned accounts had strong adoption and we're losing new deals on AI and analytics, we accelerate the roadmap. If churned accounts never reached full adoption and win rates are stable, we fix onboarding first. If it's mixed, we sequence. Does that feel fair?"
+
+Write it down and send it to both. That document becomes everyone's protection. No one can later claim the rules were rigged, and the "loser" can point to having agreed to fair terms, which is itself a face-saving position.
+
+## 6. Build in a no-lose outcome for both
+
+Neither VP should face a scenario where their function is labeled the failure. Frame the realistic outcomes so each has a respectable role:
+
+- **If the data favors Services:** "Product's roadmap concerns are valid; we just need customers to reach value first so new features actually land. Product will have better adoption data to prioritize with."
+- **If the data favors Product:** "Services' onboarding concerns are real; they're just not the primary driver. We'll still improve implementation, but the urgent investment is the roadmap."
+- **If it's mixed**, which is the most likely result: "Both of you were seeing real parts of the problem. Here's the sequence."
+
+Say this upfront: "Whatever we find, I expect both functions will have work to do. This is about sequencing, not about who was wrong."
+
+The diagnostic then becomes a question of *priority*, not *vindication*. That's much lower stakes for everyone.
+
+## 7. Show them the findings before the CEO sees anything
+
+When results come in, walk each VP through the data privately before any group or CEO meeting. This gives them time to absorb unwelcome findings in private, adjust their position, and arrive at the CEO meeting with a gracious stance already prepared.
+
+A VP who sees the data first can say "The evidence changed my mind," which reads as intellectual honesty. A VP who sees it for the first time in front of the CEO will either get defensive or look caught off guard. Both damage the relationship and the decision.
+
+## 8. Invite them to co-present
+
+Offer each VP a speaking role in the CEO meeting, both for the plan and later for the findings:
+- Product presents the win-loss and competitive analysis.
+- Services presents the implementation and adoption data.
+- You present the synthesis and the decision rule.
+
+This turns the meeting from "CS judges two VPs" into "three leaders jointly bring the CEO a rigorous answer." It also gives the CEO a far stronger impression: an aligned leadership team rather than a turf war with a referee.
+
+## Handling Resistance
+
+If a VP pushes back on the diagnostic itself, the pushback is usually a sign they're worried about the outcome. Useful responses:
+
+- **"We already know the answer."** Reply: "You may well be right. If so, the data will make your case far more convincing to the CEO than the two of you debating. This is your best chance to win the argument decisively."
+- **"This will slow us down."** Reply: "It's five weeks, and we're starting at-risk account work immediately in parallel. Picking the wrong priority would cost us a year."
+- **"This feels like it's aimed at me."** Reply: "It was designed to check my bias as much as anyone's, and you're shaping the tests. If anything looks unfair, tell me and we'll fix it before we start."
+
+## One Honest Caveat
+
+These techniques work because they make the process genuinely fair, not because they create an illusion of fairness. If either VP senses you've pre-decided the answer and are using their input for cover, you'll lose their trust, and it will be hard to recover. So hold your own hunch loosely, include their tests in good faith, and be prepared to report a result that surprises you. The goal isn't to manage them into agreement. It's to build a process credible enough that everyone, including you, can accept wherever it lands.
+
+## Turn 4
+
+**User:** Still using impression management, how should I explain all this to my own CS team so they don't feel blamed for the churn while the diagnostic runs?
+
+**Assistant:**
+
+# Explaining the Diagnostic to Your CS Team
+
+Your team faces a double face threat. Churn is visibly "their" metric, and they'll soon learn that you told the CEO CS made mistakes. If they hear about that admission secondhand, it will sound like you blamed them to protect yourself. So the goal is to be **consistent across audiences** while making clear that the failures you named belong to the *system you run*, not to individuals.
+
+## 1. Tell them before anyone else does
+
+Word travels. If your team hears through other departments that "CS admitted fault to the CEO," they'll fill the gap with the worst interpretation. Brief them before the CEO meeting, or immediately after at the latest.
+
+Tell them roughly what you plan to say to the CEO, including the admissions. Keeping your message to the team consistent with your message to leadership is what makes both believable. If your team later learns that you said something harsher upstairs than you said to them, you'll lose their trust permanently.
+
+## 2. Locate the failures at the leadership level, where they belong
+
+The admissions you're making to the CEO are about systems: no early-warning process, exit data that captured stated rather than real reasons, no ROI packages for champions. Those are design choices you and your leadership made. Say so:
+
+> "Churn has doubled, and I own that. When I tell the CEO what CS got wrong, I'm talking about the systems I built. We didn't have tools to catch at-risk accounts early. We weren't collecting honest exit data. That's on me, not on anyone in this room."
+
+This does more than reassure. It's accurate. Individual CSMs working without risk signals or ROI tooling were set up to struggle.
+
+Be careful not to overcorrect into "none of this has anything to do with us." Your team knows that isn't quite true, and blanket absolution sounds hollow. The honest framing is: "There are things CS can do better, and fixing them is my job first."
+
+## 3. Explain the diagnostic as protection, not an audit
+
+Your team may hear "diagnostic" as "investigation into who lost the accounts." Reframe it:
+
+> "Right now, three different departments have three different theories about churn, and when there's no data, the easy answer is to blame whoever's closest to the customer. That's us. This diagnostic replaces opinions with evidence. It protects us from becoming the default explanation."
+
+That's true, and it gives the team a reason to *want* the diagnostic to succeed.
+
+## 4. Give them an active role
+
+People feel blamed when they're the *subject* of an inquiry. They feel valued when they're *contributors* to it. Your CSMs have more ground truth than anyone. Make that explicit:
+
+- Ask them to reconstruct timelines for churned accounts they managed: when did things start going wrong, and what was happening with implementation, support, or the product at that point?
+- Ask what customers said to them informally that never made it into official exit reasons.
+- Have them flag current accounts that look like past churn patterns.
+
+Frame it as expertise the diagnostic can't work without. That shifts their identity in this process from "suspects" to "investigators."
+
+## 5. Make honest reporting safe
+
+This is the insight from the impression management lens that most leaders miss: **your CSMs have probably been managing impressions upward too.** When health scores are tied to performance reviews and bad news reflects on the messenger, people report accounts as greener than they are. Some of your churn "surprises" may not have been surprises to the CSMs, just to you.
+
+If that's happening, the diagnostic will expose it, and your team will be afraid of that exposure. Address it directly:
+
+> "I suspect some of you have seen accounts heading for trouble and didn't feel you could flag it without it reflecting on you. If so, that's a problem I created, not you. From now on, raising risk early is the most valuable thing you can do. Nobody gets penalized for an honest red flag. The only real mistake is a surprise at renewal."
+
+Then back it up with actions, because words alone won't change behavior:
+- Visibly thank the first person who flags an at-risk account.
+- Separate health-score accuracy from performance evaluations, at least during the diagnostic.
+- When someone reports bad news, respond with "What do you need?" rather than "Why didn't you catch this sooner?"
+
+## 6. Put them to work on the immediate actions
+
+Waiting passively while leadership investigates churn is stressful. Doing something about it restores a sense of control. The parallel actions you described to the CEO are natural team work:
+
+- **At-risk triage:** CSMs lead recovery plans for low-adoption accounts renewing in the next two quarters.
+- **Champion ROI packages:** CSMs build business reviews that give sponsors a success story for their CFO.
+
+These also give your team visible wins to point to, which helps how CS is perceived across the company while the diagnostic runs.
+
+## 7. Defend them across the organization
+
+Your team will be watching how you represent them to Product, Services, and the CEO. If someone in another function says "CS lost those accounts," respond on the spot and in public: "We're testing exactly that, along with the other theories. Let's let the data answer it."
+
+This matters more than anything you say in a team meeting. People judge a leader's loyalty by what the leader does when the team isn't in the room, and they always find out.
+
+## 8. Be honest about what you can't promise
+
+Your team may be quietly worried about jobs, restructuring, or a CS reorganization if the numbers don't improve. Don't make promises you can't keep. "Nobody's job is at risk" will destroy your credibility if it turns out to be wrong. Instead:
+
+> "I can't predict every decision the company makes. What I can promise is that I'll represent this team fairly, I'll tell you what I learn as I learn it, and nobody will hear about a decision affecting them from someone other than me."
+
+Candor about uncertainty builds more trust than reassurance that later proves hollow.
+
+## A Suggested Team Conversation
+
+1. **Ownership:** "Churn doubled. I own it, and here's what I'm telling the CEO."
+2. **Where the failures sit:** "The gaps I'm naming are systems I built, not individual performance."
+3. **Why the diagnostic helps us:** "Without data, we're the default blame. This replaces opinions with evidence."
+4. **Your role:** "You have ground truth no one else has. I need your timelines and your informal intelligence."
+5. **The new rule:** "Honest red flags are rewarded. Surprises at renewal are the only real mistake."
+6. **Immediate work:** at-risk triage and champion ROI packages, starting this week.
+7. **What I'll do for you:** "I'll defend this team fairly and keep you informed. You'll hear things from me first."
+
+## One Honest Caveat
+
+The diagnostic may reveal real individual performance issues, such as a CSM who ignored clear warning signs or mishandled a key account. If so, deal with it privately and fairly, but don't pretend it didn't happen to keep your earlier "this isn't about individuals" message intact. Your team will respect a leader who protects them from unfair blame far more than one who shields everyone from all accountability. Fairness means blame lands where it belongs, whether that's the system, the leader, or occasionally a person.
+
+## Turn 5
+
+**User:** What should we do?
+
+**Assistant:**
+
+# What to Do
+
+Here is the full plan in one sequence: a best bet, and what to do each week.
+
+## The Short Answer
+
+**Don't bet the company on either VP's theory yet.** Spend five weeks finding out which is right, while starting work that pays off either way. My best guess is that implementation friction is the root cause and "product gaps" is the story customers tell on the way out. But the new-logo win rate could prove me wrong, and that's exactly why you test before committing a year of investment.
+
+## Week 0: Before the CEO Meeting
+
+1. **Pull the quick data you already have.** Before briefing anyone, check new-logo win rates over 18 months, and implementation duration and first-renewal timing for churned vs. retained accounts. If the answer is already obvious, the plan gets simpler and your credibility goes up.
+2. **Meet each VP one-on-one.** Own your exposure, state their theory fairly, and ask what evidence would convince them either way. Build their tests into the diagnostic.
+3. **Write down the decision rule** and get both VPs to agree before any new data comes in:
+   - Strong adoption plus falling win rates: accelerate the roadmap.
+   - Weak adoption plus stable win rates: fix onboarding first.
+   - Mixed: sequence both, and state which comes first.
+4. **Brief your CS team.** Tell them what you'll say to the CEO, place the failures in the systems you built, and make honest risk reporting safe.
+
+## Week 1: The CEO Meeting
+
+Open with ownership, name what CS got wrong, present both theories fairly, and lay out the diagnostic with its deadline and decision rule. Invite both VPs to co-present. Leave the CEO with a one-line summary they can take to the board.
+
+## Weeks 1–5: Two Tracks in Parallel
+
+**Track 1: The diagnostic**
+- Third-party exit interviews with churned customers, asking about the decision's timeline, not just its reasons. Talk to end users, not only sponsors.
+- Adoption depth before churn: did churned accounts ever use your existing analytics?
+- Win-loss analysis on new deals.
+- What churned customers actually use at the competitor.
+- CSM-reconstructed timelines for each churned account.
+
+**Track 2: Actions that help regardless of the answer**
+- Triage every low-adoption account renewing in the next two quarters, with a named recovery owner.
+- Build ROI-focused business reviews so champions have a success story for their CFO.
+- Stand up a basic early-warning signal from usage data, even a rough one.
+- Adopt one shared metric across CS, Product, and Services: time-to-first-value or 12-month adoption depth.
+
+## Week 5–6: Decide
+
+Walk each VP through the findings privately first, then present to the CEO together. Apply the decision rule you all agreed to.
+
+**If Services is right:** Make onboarding the priority for the next two to three quarters. Shorten implementations, define "first value" milestones, and add adoption support. Keep the roadmap moving but narrower, and use adoption data to decide which AI and analytics features matter most.
+
+**If Product is right:** Accelerate the roadmap, focused on the specific capabilities you're losing deals on, not a general AI push. Keep the onboarding fixes, but they're no longer the urgent investment.
+
+**If it's mixed:** Fix onboarding first for new and at-risk customers, because features can't save accounts that never adopt. Run targeted roadmap work on the one or two capabilities that show up in both win-loss and churn data.
+
+## After the Decision
+
+- Track the shared metric monthly, visibly, across all three functions.
+- Keep third-party exit interviews running permanently, so you never again depend on stated reasons.
+- Revisit in two quarters. First-renewal churn should move first if the diagnosis was right.
+
+## The One Thing Not to Do
+
+Don't fund a major roadmap acceleration on the strength of exit surveys alone. If the real problem is adoption, you'll spend a year building features that churning customers never reach, and the churn numbers won't move.
+
+## Outcome summary (sent to Jev)
+
+The recommendation is not to bet the company on either VP's theory yet, but to spend five weeks testing which is right while starting work that pays off either way. The best guess is that implementation friction is the root cause and "product gaps" is the story customers tell on the way out. Stated exit reasons are managed impressions that blame the market and spare the champion who ran a failed rollout. The new-logo win rate is the single best discriminator, because prospects judge only product and demos, never onboarding.
+
+First, pull existing data: 18 months of win rates, implementation duration, and first-renewal timing for churned versus retained accounts. Meet each VP privately, state their theory fairly, and build their proposed tests into the diagnostic. Then get both to agree in writing on a decision rule before any new data arrives:
+
+- **Strong adoption and falling win rates:** accelerate the roadmap on the specific capabilities losing deals.
+- **Weak adoption and stable win rates:** fix onboarding first.
+- **Mixed results:** fix onboarding for new and at-risk customers, plus targeted work on one or two capabilities.
+
+The diagnostic includes third-party exit interviews about the timeline of the decision, including end users; adoption depth before churn; win-loss analysis; what churned customers use at competitors; and CSM-reconstructed timelines. In parallel, the team should triage low-adoption renewals, build ROI reviews for champions, create a rough early-warning signal, and adopt a shared metric such as time-to-first-value.
+
+Own the churn number with the CEO, frame the result as sequencing rather than a verdict, and brief the CS team honestly. The key caveats: hold the prior loosely, report unflattering findings plainly, and never fund major roadmap acceleration on exit surveys alone.

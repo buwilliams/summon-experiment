@@ -1,0 +1,392 @@
+# critical-rationalism/legacy-rewrite/testD
+
+Model: claude-opus-5-5 · 2026-09-24T14:46:24.134876+00:00
+
+## Turn 1
+
+**User:** I lead engineering for a mid-sized company whose core product is a 20-year-old policy administration system for property and casualty insurers. It still works and it runs most of our revenue, but every new feature takes months, our best engineers keep leaving, and two competitors now market themselves as "cloud-native." Our CTO believes we must rewrite the platform from scratch on a modern stack over the next two years, because incremental fixes will never get us out of the hole. Our head of product believes we should modernize incrementally, carving off one capability at a time behind the existing system while continuing to ship features customers are asking for. Which strategy is right?
+
+I don't need certainty; I want the most reasonable explanation we can act on now and correct as we learn. Treat each belief as a conjecture: what does each one claim is going on, and why? Whose values and goals is each one built around, and are they the ones that matter most here? What might both be leaving out that could change the outcome? Which assumption is most worth checking first, and what is a quick way to check it? And is there a better explanation that fits the same facts than either one?
+
+**Assistant:**
+
+# Rewrite vs. Incremental Modernization: Treating Both as Conjectures
+
+**Short version:** Both positions assume the codebase is the main reason change is slow, and neither has shown it. The first thing to establish is where your feature lead time actually goes. The answer will likely point to a third option that neither the CTO nor the head of product has proposed.
+
+---
+
+## 1. What each belief claims is going on
+
+**The CTO's conjecture (rewrite):**
+- *Claim:* The architecture is the root cause. The stack, data model, and accumulated coupling make every change expensive. The cost of change keeps compounding, so incremental work only slows the decline.
+- *Implied mechanism:* A clean system on a modern stack will have lower cost per feature, attract and retain engineers, and give sales a credible "cloud-native" story.
+- *Hidden premises:* The team can faithfully re-specify 20 years of behavior. Two years is realistic. Customers will migrate. The business can survive a period of little feature delivery.
+
+**The head of product's conjecture (incremental / strangler fig):**
+- *Claim:* The system's accumulated behavior is the asset, and the risk of losing it outweighs the cost of living with it. You can capture most of the benefit by extracting capabilities one at a time while revenue keeps flowing.
+- *Implied mechanism:* Each extracted piece is independently faster to change. Over time the legacy core shrinks.
+- *Hidden premises:* The system has seams you can cut along. The integration tax of running two systems won't eat the gains. Incremental progress will be fast enough to matter competitively and to keep engineers.
+
+## 2. Whose values each is built around
+
+| | CTO | Head of Product |
+|---|---|---|
+| Centers | Engineering quality, talent, long-term optionality, competitive positioning | Current customers, revenue continuity, risk control |
+| Time horizon | 3–5 years | 0–18 months |
+| Failure it fears most | Slow death by irrelevance | Fast death by a failed big-bang |
+| Failure it underweights | Rewrite never reaching parity (the most common outcome) | Permanent hybrid that's worse than either end state |
+
+**Whose goals should matter most?** Your customers are carriers. They are regulated, conservative, and they buy on reliability, compliance, and speed-to-market for their own product changes: new states, rate revisions, new lines. Their policyholders depend on correct billing and coverage. The company's solvency depends on the revenue this system produces.
+
+The right objective is therefore neither "modern stack" nor "minimal risk." It is **restoring the ability to change the product quickly and safely without putting in-force business at risk.** Engineer retention matters a great deal, but mainly as a means to that end. The CTO's framing leans toward engineering goals, and the head of product's toward near-term customer goals. Neither states the shared objective outright.
+
+## 3. What both might be leaving out
+
+1. **Where the months actually go.** "Features take months" might be coding in a hard codebase. It might equally be manual regression testing, release windows, regulatory form and rate filing, requirements churn, or per-customer rework. If coding is 20% of lead time, a rewrite fixes 20% of the problem at enormous cost.
+
+2. **Per-customer customization.** Many legacy policy admin vendors carry customer-specific branches, scripts, or configuration hacks. If that is a major source of drag, a rewrite will recreate it unless the product and commercial model change too. So will a strangler approach.
+
+3. **In-force policy migration.** This is the hardest part of replacing a policy admin system, and it is mostly absent from both plans. You must convert live policies with their full endorsement history, out-of-sequence changes, billing state, and audit trail. Or you must run both systems until books renew over. Carriers control that timeline, not you. A "two-year rewrite" is really a rewrite plus a multi-year dual-run.
+
+4. **Undocumented business rules.** Twenty years of state-specific rating, forms, and edge cases live in code. Often nobody can list them. This threatens a rewrite, which must reproduce them. It also threatens incremental extraction, which must find and preserve them at every seam.
+
+5. **What "cloud-native" is actually costing you.** Is it losing deals, or is it a marketing phrase? Carriers often mean "you run it, it scales, upgrades don't hurt us." You might deliver much of that by offering the existing system as a managed, hosted service, without rewriting anything.
+
+6. **Why engineers leave.** Is it the stack, or constant firefighting, no path to meaningful work, or pay? Exit interviews will tell you. A rewrite that pulls the best people onto greenfield work while others maintain the legacy system can accelerate attrition among the maintainers you still depend on.
+
+7. **Whether seams exist.** Strangler approaches assume you can put a boundary around a capability. A 20-year-old monolith with one shared database and business logic in stored procedures may have few natural seams. Then "incremental" becomes very slow.
+
+## 4. The assumption most worth checking first
+
+> **"The codebase itself is the primary constraint on delivery speed."**
+
+Both strategies depend on it. The CTO's plan is justified only if it is strongly true. The product plan's value depends on it being partly true, in specific places. If it is false, both plans spend years solving the wrong problem.
+
+**Quick check (2–3 weeks):**
+- Take the last 15–20 shipped features. For each, reconstruct the timeline: time waiting for prioritization, time on requirements and regulatory work, time coding, time in testing and regression, time waiting for a release, and time on customer-specific rework. Use tickets, commits, and short interviews.
+- Tag where the coding time was painful. Which modules and tables were touched, and was the difficulty the stack, missing tests, or unclear business rules?
+- In parallel, run two cheap sanity checks. Review 6–12 months of win/loss notes for how often "cloud-native," hosting, or ops actually decided a deal. Re-read exit interviews for the real reasons people left.
+
+**How to read the results:**
+- *Coding dominates and concentrates in a few areas* (e.g., rating, product configuration): targeted replacement of those areas.
+- *Coding dominates everywhere and the data model is the problem:* the CTO's diagnosis gains real weight.
+- *Testing, release, and customization dominate:* fix the delivery system first. Neither plan addresses this directly.
+
+**A second cheap test, if the first points toward extraction:** give a small team 6–8 weeks to extract one thin, real capability behind the existing system and ship it. How hard it is to find a seam, keep the data consistent, and preserve behavior will tell you more about both strategies than any debate.
+
+## 5. A better explanation that fits the same facts
+
+**Conjecture:** The real problem is the cost and risk of change, not the age of the stack. That cost is driven mainly by three things: business knowledge that exists only in code, no fast automated safety net, and variation (by state, product, and customer) that is hard-coded rather than modeled. Change demand is probably concentrated in a few areas, above all product definition, rating, and forms, rather than spread evenly.
+
+This explains the same facts:
+- Features take months because every change risks breaking something nobody fully understands, so testing and caution dominate.
+- Good engineers leave because the work is fearful archaeology, not because the language is old.
+- Competitors win on "cloud-native" partly because it signals speed and low operating burden, which could be delivered in other ways.
+
+**Strategy it implies (neither pure rewrite nor pure strangler):**
+
+1. **Build the safety net first (months 0–6).** Write characterization tests against real policy scenarios, especially rating and endorsements. Automate regression. Shorten the release cycle. This makes everything that follows cheaper and gives engineers visible wins.
+
+2. **Extract business rules into explicit models** where change demand is highest: product, rating, and forms configuration. This targets the actual bottleneck and produces the specification a future replacement would need anyway.
+
+3. **Replace selectively where change concentrates**, using a strangler approach only where real seams exist.
+
+4. **Address "cloud-native" through the operating model.** Offer managed hosting, observability, and painless upgrades, so sales gets an answer without waiting for new code.
+
+5. **Keep a real new-core option alive, but scope it differently:** new business, new lines, or new customers on a new platform, with existing in-force books left where they are. This is a common, lower-risk pattern in insurance. It avoids the in-force migration trap and earns revenue early.
+
+## Decision triggers to correct course
+
+- **Move toward the CTO's view if:** lead-time analysis shows the data model itself blocks most changes; seam experiments repeatedly fail; or win/loss data shows you're losing material deals specifically on architecture. Even then, prefer "new core for new business" over "rewrite and migrate everything."
+- **Move toward the product view if:** a few modules account for most change pain and extraction pilots succeed within budget.
+- **Kill signals for incremental work:** after 12 months, lead time hasn't improved measurably, or dual-system integration costs are growing faster than the legacy footprint is shrinking.
+- **Kill signals for any rewrite effort:** parity milestones slip more than a quarter, or no customer is willing to commit to piloting it.
+
+**Practical recommendation:** Tell both leaders the question isn't settled yet. Commit to a 6–8 week discovery covering the lead-time breakdown, win/loss and exit-interview review, and one extraction pilot, with an agreed rule for what results would favor which path. This settles the disagreement with evidence instead of seniority, and the discovery work is useful whichever way it comes out.
+
+## Turn 2
+
+**User:** Before we spend six weeks analyzing our own delivery data, shouldn't we ask our three or four biggest carrier customers what would make them renew or leave, since their answer might matter more than anything we find internally?
+
+**Assistant:**
+
+You're partly right, and it exposes a gap in what I proposed. I included win/loss notes but not direct conversations with current customers, and those could change the goal itself. If your two largest carriers say they're issuing RFPs next year, the timeline for everything shifts, and no amount of internal analysis would have told you that.
+
+But it shouldn't be *instead of* the internal work, and it shouldn't come first as a gate. The two answer different questions:
+
+- **Customers tell you the target:** what speed, capabilities, and operating model would make them stay, and how much time you have.
+- **Internal data tells you the path:** why you can't deliver that today, and which strategy would fix it.
+
+A customer can tell you "rate changes take you four months and our competitors' vendors do it in three weeks." They can't tell you whether that's a stack problem, a testing problem, or a customization problem. You need both, and the customer conversations take about two weeks, so run them in parallel.
+
+## Why "ask the biggest customers" is weaker evidence than it looks
+
+1. **Your biggest carriers are a biased sample.** They're likely your most customized, most integrated, and most locked-in accounts. They may say "just don't break anything," which pushes you toward incrementalism. The customers who would push you hardest toward "cloud-native" are the prospects who already chose a competitor, and they aren't in the room.
+
+2. **People predict their own future behavior poorly.** "What would make you leave?" invites speculation. Carriers often say price or features and then renew or leave for other reasons: a new CIO, an acquisition, a vendor consolidation mandate.
+
+3. **The question itself sends a signal.** Asking a carrier "should we rewrite our platform?" can make them worry about stability and start looking around. It can also create commitments you haven't decided to make.
+
+4. **They'll optimize for their own situation.** The largest carrier may want features that matter to nobody else. Designing your strategy around three accounts can trap you.
+
+## How to ask so the answers are useful
+
+Ask about past behavior and specific events, not opinions about your architecture:
+
+- "Think of the last change you needed from us. What was it, how long did it take, and what did the delay cost you?"
+- "Are you evaluating other systems now, or planning to in the next 18 months? What triggered that?"
+- "Which vendors have you seen demos from? What in those demos got your attention?"
+- "What does 'cloud-native' mean to you in practice: hosting, upgrades, APIs, speed of product changes, cost?"
+- "If we moved you to a new platform, what would that migration cost you, and how long would your team need?"
+
+That last question may matter most, because it directly tests a key rewrite assumption: that customers will migrate. If carriers tell you conversion would take them 18 months and require board approval, a two-year rewrite plan is really a four- or five-year plan.
+
+## Broaden the sample cheaply
+
+- Your 3–4 largest carriers
+- 2–3 mid-sized or newer customers, who are often more candid and more representative of where growth comes from
+- 2–3 lost prospects or churned customers, who have the most direct evidence on the "cloud-native" question
+- Your own sales and account managers, who hear renewal risk before leadership does
+
+## Revised plan
+
+Run both tracks at once:
+
+- **Weeks 1–2:** Customer and prospect conversations happen alongside the lead-time analysis.
+- **Weeks 1–6:** The extraction pilot runs.
+- **After week 2:** If the customer answers reveal urgent churn risk, compress the rest of the discovery and act on the retention issue immediately.
+
+That way customer urgency can override the plan if it needs to, without replacing the evidence about what's actually slowing you down.
+
+## Turn 3
+
+**User:** What if the board or investors are pushing the CTO's rewrite because they want a "cloud-native" story for a sale or funding round, so the goal isn't really customer speed at all?
+
+**Assistant:**
+
+That changes the objective, and it's worth taking seriously rather than treating as a distortion. The owners are entitled to optimize for a sale or funding round. But it doesn't automatically favor the rewrite. Framed as a valuation question, the rewrite often looks worse, not better.
+
+## First, check whether this is actually the goal
+
+Right now it's a hypothesis. The board may be pushing the rewrite directly, or the CTO may be citing board interest to support a plan he already favored. The board may also be saying "we need a cloud-native story" without having an opinion on how to get there. Ask the board, or whoever owns the relationship, three direct questions:
+
+1. What's the time horizon: a sale or raise in 12 months, 24 months, or later?
+2. Who is the likely buyer or investor: a strategic acquirer, private equity, or growth equity?
+3. What have your advisors said those buyers pay for in comparable deals?
+
+The answers matter more than anything else here, because timing and buyer type determine which strategy creates value.
+
+## Why a rewrite is often a bad exit strategy
+
+**The timing usually doesn't fit.** If the sale is 12–24 months out and the rewrite takes two years to reach parity, plus years more to migrate customers, you'll go to market in the middle of the rewrite. That's when risk is highest: two systems to fund, an unfinished platform, and no migrated customers yet.
+
+**Diligence sees through stories.** Serious buyers run technical diligence. They'll ask how many customers run on the new platform, how much revenue it carries, what parity it has reached, and what migration will cost. A half-built platform with no production customers is usually discounted as execution risk, and sometimes it becomes a price reduction or a deal-breaker. Overstating readiness also creates legal exposure in the purchase agreement.
+
+**Churn before a sale is expensive.** If the rewrite starves customers of features for 18 months and even one large carrier signals non-renewal during diligence, the damage to valuation can exceed anything the "cloud-native" story adds. With customer concentration in a few carriers, this risk is serious.
+
+**Some buyers want the opposite.** Private equity firms often value a stable, sticky, cash-generating system with high retention. For them, an expensive rewrite burning margin may reduce the price.
+
+## What "cloud-native" is really worth to a buyer
+
+Buyers rarely pay for the architecture itself. They pay for what it signals:
+
+- recurring subscription revenue rather than licenses and services
+- healthy gross margins and low cost to serve
+- high customer retention
+- the ability to ship and grow
+- credible scalability to new customers
+
+Several of these can be demonstrated in 12–18 months without a rewrite:
+
+- **Convert customers to a managed, hosted subscription.** This shifts revenue toward recurring and usually earns a higher valuation multiple, faster than any rewrite.
+- **Ship a modern API layer and one or two new cloud-native modules** running in production with real paying customers.
+- **Show measurable improvement in delivery speed.** "Rate changes used to take four months, now three weeks" is evidence a buyer can verify.
+- **Present a phased platform roadmap** with completed milestones, not just promises.
+
+A demonstrated trajectory with proof points is usually worth more in diligence than an ambitious plan with nothing in production.
+
+## Where the goals conflict and where they align
+
+The owners' goal and the customers' goal mostly align, because what buyers pay for (retention, recurring revenue, delivery speed) is largely what customers need. The real conflict comes if the board wants the *appearance* of modernization on a timeline that forces choices hurting customers or overstating readiness. Name that tradeoff explicitly rather than quietly resisting it or going along with it.
+
+## What to do now
+
+1. **Clarify the objective** with the board: horizon, likely buyer, and valuation drivers.
+2. **Ask the board's advisors** what comparable insurance software deals rewarded and penalized. They'll know whether buyers have discounted mid-flight rewrites.
+3. **Add a valuation lens to the discovery work.** For each option, ask what diligence would find at the likely sale date.
+4. **Bring the board a comparison.** Show what each path looks like at the exit date, including revenue mix, retention risk, platform status, and delivery speed, rather than arguing engineering merits.
+
+If the board genuinely wants the best exit, that comparison is likely to favor a hybrid: hosted delivery, visible modernization with production proof points, and protected retention. If the board still insists on a full rewrite before a near-term sale, at least the decision will be made knowing its costs.
+
+## Turn 4
+
+**User:** You keep treating managed hosting as the quick win. How do we check that our carriers would actually let us run their policy data, and that we can operate it reliably, before we pitch it to the board?
+
+**Assistant:**
+
+You're right to push on this. I've been treating managed hosting as an easy win when it's really another untested assumption. It rests on two separate claims, and either could fail:
+
+1. **Carriers will allow it.** Their regulators, security teams, and contracts permit you to hold their policy data.
+2. **You can run it.** Your system and team can operate it reliably and at a sustainable cost.
+
+Here's how to test each before it goes anywhere near the board.
+
+## Part 1: Will carriers let you hold their data?
+
+### Start with what you already have (days, not weeks)
+
+- **Existing contracts.** Check what your agreements say about hosting, data location, subcontractors, audit rights, and data return at termination. Some may need renegotiation before hosting is possible.
+- **Past security questionnaires.** Your sales or security team has probably filled out vendor risk questionnaires. They show what carriers ask for and where you've struggled to answer.
+- **Current hosting arrangements.** Do any customers already run your system through a third-party hosting provider? If so, they're your best evidence and a natural pilot.
+- **Industry precedent.** Major policy admin vendors already run carrier systems as hosted or SaaS offerings, so vendor hosting is broadly accepted. But acceptance varies by carrier, and precedent doesn't mean your carriers will accept *you*.
+
+### Talk to the right people at each carrier
+
+Business sponsors will say "sounds great." The real gatekeepers are the carrier's CISO or security team, vendor risk management, IT architecture, and sometimes compliance. Ask them:
+
+- "What would a vendor need to show before holding your policy data? Which certifications, audit reports, and contract terms?"
+- "Do you have a cloud-first policy, a cloud-restricted policy, or case-by-case review?"
+- "Have you approved other vendors to host core systems? How long did that approval take?"
+- "What integrations would need to change?" Claims, billing, general ledger, agent portals, print-and-mail vendors, and nightly file transfers often assume the system sits inside the carrier's network.
+- "What would your regulators or auditors need from you?"
+
+### Check the regulatory and certification requirements
+
+Have counsel and a security advisor map what applies. Things that commonly come up:
+
+- **State insurance data security laws** (many states have adopted the NAIC model law) and **New York DFS cybersecurity rules**. These require carriers to oversee third-party service providers and impose incident notification obligations.
+- **SOC 2 Type II reports.** Most carriers will expect one. This is often the binding timeline constraint, because a Type II report covers an observation period, typically 6–12 months, *after* you've put the controls in place. If you don't already have one, "quick win" may mean a year or more before you can host production data for carriers who require it.
+- **Data residency, encryption, disaster recovery, right-to-audit, and breach notification terms**, which carriers will want in the contract.
+
+A readiness assessment from a SOC 2 auditor, usually a few weeks, will tell you how far you are from passing.
+
+## Part 2: Can you actually run it?
+
+A 20-year-old system wasn't built for cloud hosting. Test the specific things likely to break:
+
+- **Technical fit.** Does it depend on specific databases, operating systems, or mainframe components? Are those licensable in a hosted setting, and at what cost? Some database and middleware licenses become much more expensive in the cloud.
+- **Batch processing.** Policy systems run large nightly and month-end cycles for renewals, billing, and reporting. Will they finish on time in a hosted environment?
+- **Per-customer divergence.** If carriers run different versions or customizations, you'll likely need a separate environment for each (single-tenant hosting). That's far more expensive to run and upgrade than one shared system, and it directly affects the margin story you'd tell the board.
+- **Operational capability.** Do you have people who can handle 24/7 on-call, monitoring, patching, backups, security incident response, and tested disaster recovery? Most software companies that have only shipped installed software don't. Estimate what you'd need to hire or contract.
+
+### A practical operational test (4–8 weeks)
+
+1. Stand up a full production-like copy of the system in a cloud environment, using masked or synthetic data.
+2. Run a realistic batch cycle at the data volume of your largest carrier and measure how long it takes.
+3. Run a disaster recovery drill: take the environment down and restore it. Measure how long recovery takes and how much data would be lost.
+4. Track the actual infrastructure and licensing cost, then extrapolate the cost per customer.
+5. Log every manual step. These become your staffing and automation estimates.
+
+### A low-risk pilot with a real carrier
+
+Offer to host one willing carrier's **test, training, or disaster recovery environment**, not production. The carrier gets something useful, and you learn how their security review, integration, and support work with real stakes but no production data at risk.
+
+## Part 3: Check the economics
+
+Hosting only helps the valuation story if it's profitable. Before the board meeting, estimate:
+
+- infrastructure, licensing, staffing, and certification costs per customer
+- what carriers would pay, based on your conversations and competitor pricing
+- the resulting gross margin, compared with your current license and maintenance model
+
+Healthy margins make hosting a genuine revenue-mix improvement. Thin margins mean you're taking on operational risk for a label.
+
+## What to bring to the board
+
+Present hosting as a **tested option with evidence**, not a quick win. For example: "Two of four carriers would consider hosting within 12 months, subject to a SOC 2 report. We're about X months from having one. Our pilot environment ran a full batch cycle in Y hours. Estimated gross margin is Z%. Here are the risks and what it would take to address them."
+
+**Signals that hosting isn't the quick win I suggested:**
+
+- Your largest carriers flatly prohibit vendor-hosted core systems.
+- The SOC 2 timeline pushes production hosting past the likely sale date.
+- Licensing or single-tenant costs make the margins unattractive.
+- The batch cycle or disaster recovery tests fail badly.
+
+If those show up, hosting drops from centerpiece to longer-term option, and the near-term story rests more on delivery-speed improvements and new modules in production. Knowing that before the board meeting is much better than finding out during diligence.
+
+## Turn 5
+
+**User:** What should we do?
+
+**Assistant:**
+
+**Don't approve the rewrite, and don't commit to pure incrementalism either.** Spend the next eight weeks answering the questions that decide between them, while taking steps that pay off whichever way the decision goes. Then decide, using criteria everyone agreed to in advance.
+
+## This week
+
+1. **Clarify the objective with the board.** Ask about the time horizon, the likely buyer or investor, and what their advisors say those buyers value. Everything else depends on whether you're optimizing for a sale in 18 months or a durable business over five years.
+
+2. **Get the CTO and head of product to co-own the discovery.** Frame it as testing both of their hypotheses, not as picking a winner. Agree now on what evidence would favor each path, so the result feels fair to both.
+
+3. **Tell no customers about a rewrite.** Nothing is decided, and rumors of platform instability cost renewals.
+
+## Start now, whatever you decide later
+
+These are worth doing under any strategy:
+
+- **Automated regression tests** for the highest-change areas, probably rating, forms, and endorsements. They reduce risk now, make any later extraction or rewrite safer, and capture business rules that currently exist only in code.
+- **A SOC 2 readiness assessment.** If you'll ever host customer data, the certification clock is likely your longest lead time, so start it early.
+- **Retention conversations with your most critical engineers**, especially those who understand the legacy system. Losing them during a transition is the risk most likely to sink any plan.
+- **Keep shipping the top customer requests.** Slipping on these during the analysis would damage the retention you'll need under every scenario.
+
+## The eight-week discovery
+
+| Track | What it answers | Timing |
+|---|---|---|
+| Board objective | What are we optimizing for, and by when? | Week 1 |
+| Customer and prospect interviews: 3–4 largest carriers, 2–3 mid-sized, 2–3 lost prospects, plus account managers | What makes carriers stay or leave, how urgent it is, and whether they'd migrate or accept hosting | Weeks 1–3 |
+| Lead-time analysis of the last 15–20 features | Is the codebase really the bottleneck, or is it testing, releases, or customization? | Weeks 1–4 |
+| Exit interviews and engineer input | Why people actually leave | Weeks 1–3 |
+| Extraction pilot: one thin capability, shipped | Do workable seams exist? What does extraction really cost? | Weeks 1–8 |
+| Hosting feasibility: contracts, carrier security conversations, cloud test environment, batch and disaster recovery tests, cost model | Will carriers allow hosting, can you run it, and is it profitable? | Weeks 1–8 |
+
+## Week 8: decide
+
+Use the criteria agreed in week one:
+
+- **Targeted modernization** if delivery pain concentrates in a few areas and the extraction pilot succeeds. Replace those areas first, and fix testing and releases everywhere.
+- **Build a new core for new business only** if the data model blocks most changes *and* carriers won't migrate. New lines or new customers go on the new platform while existing books stay put. This beats rewriting everything and migrating.
+- **Full rewrite** only if the evidence strongly supports it, carriers commit to migrating, and the timeline fits the board's horizon. I'd expect this to be the least likely outcome.
+- **Hosting as a near-term offering** if carriers accept it, the certification timeline works, and margins are healthy. Otherwise, treat it as a longer-term option.
+
+## My best guess, open to correction
+
+I expect a hybrid. You'd fix the delivery pipeline and test coverage first, pull out the highest-change capabilities (probably product configuration and rating), offer hosting where carriers accept it, and possibly build a new core for new business. That combination gives customers faster changes, engineers meaningful work, and the board a modernization story backed by production evidence rather than promises.
+
+Give the CTO real ownership of the target architecture and any new-core work, so the outcome doesn't feel like his vision was rejected. His diagnosis that the system is holding you back is probably right. It's the prescription that needs testing.
+
+## Checkpoints after the decision
+
+Whatever you choose, review every quarter against three measures:
+
+- **Delivery speed:** lead time for comparable changes
+- **Retention:** customers and critical engineers
+- **Platform progress:** revenue or customers on new components
+
+If a measure isn't moving after two or three quarters, revisit the strategy rather than defending it.
+
+## Outcome summary (sent to Jev)
+
+The assistant recommends neither approving the from-scratch rewrite nor committing to pure incrementalism. Instead, the company should run an eight-week discovery that tests both leaders' hypotheses, while taking steps that pay off under any strategy, and then decide using criteria agreed in advance. Its central reason is that both plans assume the codebase is the main constraint on delivery speed, and nobody has shown that. The real problem may be the cost and risk of change: business rules that exist only in code, no automated safety net, and hard-coded variation by state, product and customer.
+
+This week, leadership should:
+- ask the board about its time horizon, likely buyer and valuation drivers;
+- have the CTO and head of product co-own the discovery;
+- tell no customers about a rewrite.
+
+Work to start regardless of the decision:
+- regression tests for rating, forms and endorsements;
+- a SOC 2 readiness assessment;
+- retention conversations with key legacy engineers;
+- continued shipping of top customer requests.
+
+The discovery covers interviews with customers, prospects and lost prospects, a lead-time breakdown of the last 15–20 features, exit-interview review, and a thin extraction pilot. It also tests whether hosting is feasible: contracts, carrier security reviews, cloud batch and disaster-recovery tests, and a cost model.
+
+The assistant expects a hybrid:
+- fix the delivery pipeline first;
+- extract high-change capabilities;
+- offer hosting where carriers accept it;
+- possibly build a new core for new business only, leaving in-force books where they are.
+
+It considers a full rewrite the least likely outcome, justified only if the evidence strongly supports it, carriers commit to migrating, and the timeline fits the board's horizon. It advises giving the CTO ownership of the target architecture, since his diagnosis is probably right. Quarterly reviews should track delivery speed, customer and engineer retention, and platform progress, and the strategy should be revisited if these measures stall.
