@@ -301,11 +301,12 @@ def create_app(data_path=None, gateway=None):
             return [batch_progress(b) for b in store.all("batch")]
 
     @app.post("/api/batches")
-    def new_batch(experiment_id: str | None = None):
+    def new_batch(experiment_id: str | None = None, participant: str = "Local participant"):
         with lock:
             ensure_batches()
-            sessions = store.all("session")
-            participant = os.getenv("SUMMON_PARTICIPANT") or (sessions[-1]["participant"] if sessions else "Local participant")
+            participant = " ".join(participant.split())
+            if not participant or len(participant) > 100:
+                raise ValueError("Enter a name between 1 and 100 characters.")
             c, experiment, hypothesis = study_scope(store.get("catalog", "catalog"), experiment_id)
             names = {b["name"] for b in store.all("batch")}
             names.update(r["value"]["name"] for a in store.cleanup.archives() for r in a["records"] if r["kind"] == "batch")

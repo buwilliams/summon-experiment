@@ -17,7 +17,14 @@ python -m venv .venv
 Or use `uv sync` and `uv run summon-web`. Open http://127.0.0.1:8765.
 Set `OPENROUTER_API_KEY` in the gitignored `.env` file. Both providers use this
 key; it stays on the server. `SUMMON_PORT` overrides port 8765. No WSL is required.
-The server binds to loopback and is intended for a single local user, not public hosting.
+The server binds to loopback and supports people sharing a local computer, not public hosting.
+
+On opening the app, enter your name. It is remembered for the browser tab session,
+including refreshes. Use **Switch user** in the header to enter another name or
+select a previous participant. Collect shows only your batches; new batches,
+sessions, submissions, and human judgments carry your name. Definitions, reports,
+and data management remain shared. Names are identifiers, not authentication.
+Existing records keep their original participant names.
 
 ### Collect and compare
 
@@ -89,8 +96,7 @@ A test supplies a perspective, such as Critical Rationalism, Economic, or Social
 Styles A–E specify how to prompt within that test. **Collect** creates batches
 for one experiment and assigns a chat session for each test/style combination.
 
-In **Analyze**, select a completed batch and run Jev reports. Then enter a consistent
-reviewer name and choose **Judge responses**. Compare anonymous A/B responses, choose
+In **Analyze**, select a completed batch and run Jev reports. Then choose **Compare responses**; your active name identifies your judgments. Compare anonymous A/B responses, choose
 A, B, or a tie, and optionally record why. Jev's judgment appears after saving your
 preference. Resume with the same reviewer name; recorded preferences are preserved.
 
@@ -145,3 +151,24 @@ experiment's membership. Styles are shared within a test, so deleting a style ap
 to every experiment using that test. Existing collected batch snapshots are unchanged.
 The final required hypothesis/experiment, test in an experiment, or style in a test
 cannot be removed; its disabled trash icon explains the requirement.
+
+### Focused analysis, results, and data
+
+Analyze and Results use hypothesis → experiment → batch → report breadcrumbs.
+Analyze exposes the next useful action: collect missing responses, run or resume
+Jev, then compare anonymous responses. A completed report opens the human-judging
+step; rerunning Jev is a secondary disclosure. Collect hands off directly to its
+batch in Analyze.
+
+Results first offers a choice of human judgments, rankings within a test, rankings
+across test winners, or comparison records. Tables and raw pair records appear only
+after choosing them. Jev rankings remain hidden until the current reviewer finishes
+judging. Reports remain discoverable through their saved hypothesis and experiment
+snapshots even if the live definitions have been deleted.
+
+Data opens with Clean up, Trash, and Export. Cleanup proceeds from scope to a record
+to a separate dependency-count preview, then moves the confirmed selection to trash.
+Trash opens a selected archive before offering restoration. Existing fingerprint,
+busy-request, and restore-conflict checks remain in force.
+
+Frontend checks: `node --test tests/*.test.cjs`.

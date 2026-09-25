@@ -81,7 +81,7 @@ function editor(){
   on('style-opening',()=>{st.openings??={};st.openings[e.id]=$('style-opening').value;changed();},'input');
   document.querySelectorAll('[data-scope-view]').forEach(x=>x.onchange=()=>{e.view_ids=[...document.querySelectorAll('[data-scope-view]:checked')].map(x=>x.dataset.scopeView);changed();draw();document.querySelector('.experiment-scope').open=true;});
   for(const s of state.submissions){const edit=submissionEdit(s);on('notes-'+s.id,()=>{edit.data.notes=$('notes-'+s.id).value;edit.changed();},'input');on('include-'+s.id,()=>{edit.data.included=$('include-'+s.id).checked;edit.changed();},'change');}
-  document.querySelectorAll('[data-transcript]').forEach(b=>b.onclick=async()=>{await flushEditorSaves();current=b.dataset.transcript;selectedExperiment=state.sessions.find(s=>s.id===current)?.experiment?.id||selectedExperiment;collectDepth='conversation';page='chat';render();});
+  document.querySelectorAll('[data-transcript]').forEach(b=>b.onclick=async()=>{const owner=state.sessions.find(s=>s.id===b.dataset.transcript)?.participant;if(owner&&!sameUser(owner,activeUser)){notice('Switch to '+owner+' to continue their session.');return;}await flushEditorSaves();current=b.dataset.transcript;selectedExperiment=state.sessions.find(s=>s.id===current)?.experiment?.id||selectedExperiment;collectDepth='conversation';page='chat';render();});
  }
  draw();
 }

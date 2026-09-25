@@ -50,10 +50,10 @@ function collectionScreen(){
  document.querySelectorAll('[data-collect-session]').forEach(b=>b.onclick=()=>{if(sending)return;current=b.dataset.collectSession;collectDepth='conversation';chat();window.scrollTo({top:0});});
  on('collect-new',async()=>{
   if(sending)return;sending=true;$('collect-new').disabled=true;
-  try{const b=await api('batches?experiment_id='+encodeURIComponent(selectedExperiment),{});selectedBatch=b.id;current=null;await refresh();collectDepth='conversation';}
+  try{const b=await api('batches?experiment_id='+encodeURIComponent(selectedExperiment)+'&participant='+encodeURIComponent(activeUser),{});selectedBatch=b.id;current=null;await refresh();collectDepth='conversation';}
   catch(error){sending=false;chat();throw error;}
   sending=false;await beginInterview();
  });
  on('collect-continue',async()=>{if(sending)return;collectDepth='conversation';await beginInterview();});
- on('collect-analyze',()=>{runnerBatch=batch.id;page='runner';render();});
+ on('collect-analyze',()=>openReportBatch('runner',batch));
 }
