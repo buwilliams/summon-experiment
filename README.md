@@ -137,3 +137,11 @@ and session `scenario`/`view` keys remain compatibility names for tests and froz
 experiment context. Opening templates now use `{{EXPERIMENT}}`; the old token is
 still recognized when reading historical files. Original source templates under
 `experiments/` are seed material, not the live catalog.
+
+The trash icon beside each definition selector deletes that definition and returns
+to its parent. Undo restores the most recent deletion until another edit is made.
+Hypothesis deletion includes its experiments; test deletion removes the selected
+experiment's membership. Styles are shared within a test, so deleting a style applies
+to every experiment using that test. Existing collected batch snapshots are unchanged.
+The final required hypothesis/experiment, test in an experiment, or style in a test
+cannot be removed; its disabled trash icon explains the requirement.
