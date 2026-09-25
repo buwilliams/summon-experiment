@@ -1,4 +1,173 @@
-# Summon Experiment — Conversation Specification (3 lenses × 3 scenarios × 5 conditions)
+# Summon Experiment
+
+## Current definitions and editor (2026-09-25)
+
+This section supersedes all older hierarchy and naming descriptions below.
+
+- Hypothesis → Experiment → Test → Style is the authoring hierarchy. An experiment
+  is the case formerly called a scenario. The separate multi-case study layer is removed.
+- A Test is a perspective formerly called a View. An individual chat attempt is a
+  session. An experiment's batch covers its test/style combinations.
+- The editor uses focused breadcrumb screens, editable name dropdowns, plus buttons,
+  and centered chevrons. Definitions and submission metadata save automatically.
+  Incomplete or failed edits remain local drafts; concurrent catalog changes cause
+  an explicit conflict instead of silently overwriting another edit.
+- Catalog schema 2 stores text directly on experiments. Internal view and scenario
+  keys in session snapshots remain compatibility names; UI copy uses Test/Experiment.
+  Openings use {{EXPERIMENT}}. Existing case-specific text and styles are preserved.
+- During this development reset the user authorized clearing all collected data.
+  Definition migration creates a new catalog revision; old definitions remain readable.
+
+## Study hierarchy and human judgments (2026-09-25)
+
+This section supersedes earlier UI naming and grouping descriptions.
+
+- A hypothesis has a name and editable statement. Each experiment belongs to one
+  hypothesis and is a study containing selected scenarios and views (with their styles).
+- Batches belong to experiments. Every batch freezes its hypothesis, experiment,
+  catalog revision, and scenario × view × style roster. Each assigned conversation
+  is a test; its selected LLM response is the submission. Revisions retain original tests.
+- The initial default hypothesis is “Prompting style effectiveness,” with the editable
+  statement “Prompting style affects the quality of recommendations produced through
+  human interaction.” The existing setup becomes “Human prompting study.”
+- Experiments defines hypotheses and studies. Collect, Analyze, and Results select a
+  hypothesis and study, then show only that study's batches or reports. Definition
+  edits apply to new batches, preserving historical evidence.
+- Jev still compares selected responses in both answer orders. After a report completes,
+  each named local reviewer can judge the same pairs. Response A/B order is randomized
+  independently and persisted. Scenario and verbatim responses are visible; style labels,
+  Jev scores, and other human judgments are hidden until the reviewer saves A, B, or Tie.
+- Each saved human judgment records reviewer, pair/report IDs, display order, choice,
+  mapped winning submission (or null for a tie), optional reason, timestamp, and protocol.
+  Votes are immutable and stored separately from Jev report snapshots. Duplicate retries
+  are idempotent. Reviewer names are local identifiers, not authenticated accounts.
+- Results shows human preference shares and Jev probabilities separately, pair coverage,
+  reviewer counts, agreement, and individual human records. Complete Jev rankings stay
+  hidden in the UI until the current reviewer completes that report. This is presentation
+  blinding, not access control: the local owner can inspect raw files and exports.
+- Human shares assign 1/0 to a preference and 0.5/0.5 to a tie, then average over reviewers
+  per pair. Agreement counts an exact match (including ties). Cross-view comparisons use
+  Jev's finalists, not independently chosen human finalists; human results describe those
+  same pairs and must not be interpreted as an independent cross-view tournament.
+- New data uses readable JSON and Markdown under
+  `hypotheses/<name-id>/experiments/<name-id>/batches/<name-id>/`, with `batch.json`,
+  `tests/<test-id>/session.json` and `submission.json`, `reports/<name-id>.json`, and
+  `judgments/<id>.json`. Full names live inside records; path names are shortened for
+  Windows. Catalog definitions remain immutable numbered revisions under `catalog/`.
+  Existing record paths and collected results are preserved. Export includes human ballots.
+- Chat renders Markdown headings, emphasis, lists, quotes, tables, links, and code blocks.
+  Raw HTML is escaped, unsafe link protocols are rejected, and remote images are disabled.
+  Raw Markdown remains authoritative in saved transcripts, submissions, and model calls.
+
+
+## Current protocol: human-pairwise-v1 (2026-09-25)
+
+The web application supersedes the automated procedure below for new data.
+Reason: model-written follow-ups measure a model's ability to enact prompting
+styles, whereas the intended question concerns humans using those styles.
+Multi-option preferences also make individual comparisons hard to inspect.
+The original scenario and style texts remain unchanged and seed the web catalog.
+Views correspond to the historical lenses; A–E remain styles within each view.
+New scenarios, views, and styles are editable in the application.
+
+### Collection and provenance
+
+- GPT-6 Astra through OpenRouter (`openai/gpt-6-astra`), medium reasoning,
+  16,000 maximum output tokens, no system prompt, tools, sampling overrides,
+  or provider fallbacks. Scenario context is the first user message. Subsequent
+  prompts are written by the human. Suggested openings are optional and editable
+  before sending; following the guidance is not mechanically enforced.
+- Each session freezes scenario, view, style, full style roster, catalog revision,
+  participant, batch, and model. Assistant messages (including returned reasoning
+  details) are replayed on follow-ups. Raw calls preserve resolved model and usage.
+- Human selects a complete assistant message verbatim as the solution. No model
+  summarizer is used. Refused, empty, and truncated answers cannot be submitted.
+  Submitted sessions cannot continue; a new test requires a new session.
+- Flat JSON records in `experiment-data/` store web data separately from historical
+  results, with generated Markdown companions for GitHub reading. Edits retain new
+  catalog revision files. Submission notes/inclusion may be edited; report inputs are
+  immutable snapshots and retain the original notes and responses.
+
+### Storage revision (2026-09-25)
+
+The collection interface is now called Interview. Setup controls, the separate
+view panel, and recent sessions are removed. The scenario appears in the
+conversation, with an editable prefilled opening and inline follow-up guidance.
+The human still writes prompts and selects an assistant response as the solution.
+The human interviews the LLM, not the reverse: scenario and view perspective
+are introduced in the conversation, the editable opening asks for a recommendation
+with reasons, and the human continues questioning until a recommendation is
+acceptable to submit. The human judges readiness for submission; Jev compares
+submitted LLM responses afterward. The shared recommendation-and-reasons sentence
+is visible in every new suggested opening and is sent only when the human sends it.
+These interface messages do not change the subject model's input: scenario
+context is sent once, followed by the human's prompts and assistant responses.
+
+The system resumes unfinished sessions before assigning new work. New sessions
+cover every scenario/view/style combination in `Interview round N`, with a
+deterministic shuffled order keyed by participant, catalog revision, round, and
+IDs. After a complete round, the next round starts. The participant comes from
+`SUMMON_PARTICIPANT`, the latest session, or `Local participant` on a new workspace.
+Assignment method and round are saved with new sessions. This is automated
+scheduling, not a claim of statistically balanced assignment. Existing sessions
+are preserved, and new automatic rounds stay separate from manual batches.
+
+Replaced SQLite with flat files at the user’s request for GitHub readability;
+there is no change to the experimental protocol. Files group by scenario, batch,
+view, style, and session. Reports are in each batch’s `reports/` folder. Short ID
+suffixes distinguish similarly named items. JSON is authoritative; adjacent
+Markdown renders human-readable content. Atomic file replacement prevents partial
+JSON. An ignored pending-write journal recovers multi-file saves on restart.
+Only one server process may write a data folder. Every catalog revision is
+retained from this change onward; previously overwritten revisions cannot be
+reconstructed except from saved session snapshots. The original SQLite file is
+read-only during migration and retained as a local backup. Experiment files are
+Git-trackable; keys, logs, journals, and the old database remain ignored.
+
+### Pairwise judging and reporting
+
+- Reports use one scenario, participant, batch, model, and catalog revision.
+  Choose exactly one submission per style for every included view. A view with
+  missing styles cannot rank or advance a winner. Entire views may be omitted;
+  the report only speaks about the views selected in its snapshot.
+- Every unordered within-view pair is judged twice, reversing display order.
+  Jev sees only the plain scenario and verbatim solutions as `answer_1` and
+  `answer_2`, with the question "Which answer do you think is better?" No metadata,
+  view names, style labels, or conversation wrappers are supplied. Text itself
+  may reveal the style; anonymity is not guaranteed semantic blinding.
+- Both probabilities must be finite, in [0,1], cover both answers, and sum to
+  approximately one. Invalid or failed calls stop that report with a visible error.
+  Every successful call is checkpointed; resume performs unfinished calls only.
+- A pair's score is the mean of its two order-adjusted probabilities. A style's
+  within-view score is its equal-weight mean over opponents. Every highest-scoring
+  style advances, including numerical ties (tolerance 1e-9). This is a mean
+  preference ranking, not a claim that a Condorcet winner exists.
+- Across views, every winning solution meets each winning solution from other
+  selected views in both orders. Dashboard rows represent solutions, including
+  co-winners, rather than pooling ties into an invented single view winner.
+- Reports record raw responses, actual model snapshots, ID mappings, timestamps,
+  pair scores, and order differences. Rankings are shown only on completion.
+  Five styles yield 10 pairs / 20 calls per view. Three views without ties yield
+  30 within-view pairs plus 3 cross-view pairs / 66 calls total.
+
+### Interpretation
+
+This measures Jev's preference for a human-selected answer produced in a labeled
+prompting session. It does not by itself identify a causal prompting effect.
+Human skill, effort, compliance, learning/carryover, answer length, and selection
+can affect outcomes. Record deviations in submission notes, vary collection order,
+and repeat matched batches before making broad claims. A 0.5 pair score is the
+neutral reference, not statistical confidence. Order reversal diagnoses one bias;
+it does not remove judge taste, answer-content cues, or all comparison issues.
+There is no automatic inferential pooling across batches or historical runs.
+
+References: [Astra](https://developers.openai.com/api/docs/models/gpt-6-astra),
+[OpenRouter parameters](https://openrouter.ai/docs/api/reference/parameters),
+[Jev API](https://openrouter.ai/docs/guides/community/jev-tutorial).
+
+---
+
+## Historical automated protocol (retained for reproduction)
 
 **Question: which prompting style performs best?** The styles are asking plainly, assigning a persona, naming a method, and enacting the method in its own vocabulary; "best" means the outcome a judge prefers. A child-lens control checks that any gain comes from the method, not just from asking more questions.
 
@@ -433,3 +602,86 @@ concurrency: 8              # conversations / Jev calls in parallel
 ```
 
 API keys come from the environment or `.env`. Requirements: Python ≥ 3.11 with `uv`; dependencies `anthropic`, `httpx`, `pyyaml`, and `python-dotenv`.
+
+### Empty composer update (2026-09-25)
+
+The message box now starts empty, with no suggested opening inserted. Only a
+human-written saved draft or a failed pending prompt is restored. This supersedes
+the prefilled-opening behavior described above.
+
+### Automatic initial prompt (2026-09-25)
+
+The user requested that the first LLM prompt be Scenario + View + Style.
+Starting an interview now automatically sends one user-role message containing
+the frozen scenario text, view name, style name, and that style's opening
+instructions, followed by a request for a recommendation and reasons. The
+scenario placeholder is removed from style instructions because the scenario
+already appears once in its own section. Follow-up guidance stays in the human
+interface. No hidden system prompt is introduced.
+
+The initial request and response are saved in the transcript. Sessions record
+`initial_prompt` and `collection_protocol: automatic-opening-v1`. Later user
+messages continue that conversation with no duplicate scenario prefix. Existing
+conversations are not rewritten. Resuming an interview with a response does not
+regenerate the opening; an unsuccessful opening can be retried in place. Only a
+selected LLM response is submitted to Jev, as before. This supersedes the earlier
+human-authored-opening procedure; distinguish this protocol in later analysis.
+
+### Explicit batches and progress (2026-09-25)
+
+The report runner selects one batch, rather than individual submissions. It
+requires every interview in the batch's frozen roster to be complete and included.
+The latest submitted session for each combination is selected automatically.
+Every scenario is validated before any Jev calls start; each scenario receives
+its own report with the batch ID recorded. Scenario comparisons never mix.
+The lower-level single-report API remains available for historical compatibility.
+
+Batch names are standardized as `Batch YYYYMMDD-N`: local creation date and an
+incrementing per-day suffix, independent of the catalog revision. Legacy batch
+labels and session/submission metadata are migrated together under stable IDs;
+conversation content, response text, and existing report snapshots are unchanged.
+Existing file paths remain stable. New records use the dated batch name.
+
+Each batch has a manifest with participant, name, catalog revision, and the full
+frozen catalog. Legacy sessions are grouped by participant, revision, and batch
+name. New batches start fresh even if another batch is unfinished. Selecting an
+earlier batch resumes its own open interviews; assignments use that batch's
+frozen roster. Completed batches do not silently create another round. This
+supersedes automatic cross-batch continuation described above.
+
+Progress counts the latest attempt for each scenario/view/style combination:
+submitted is complete, open is in progress. Repeated revisions do not increase
+the number of planned interviews. Revising a submitted interview copies its
+conversation and links back to the original session. On resubmission, only the
+selected LLM response becomes a new submission; the old submission is marked
+superseded and excluded from future selection. Old transcript/response text and
+existing report snapshots remain preserved. Edited interviews are revisions,
+not independent replication data. Start a new batch for independent repeats.
+
+## Recoverable data management (2026-09-25)
+
+Data provides scoped cleanup: all collected records, one experiment's data, one
+batch, one test family, one report, or human judgments only. Removing a test removes
+all revisions for its batch/scenario/view/style cell and reports that reference any
+of those responses, plus their human ballots. Removing a report retains collection
+tests. Catalog definitions and revision history are never included in cleanup.
+
+Cleanup requires a current preview fingerprint, recalculated under the application
+and storage locks. It refuses stale previews and operations during model/report
+work. Each operation archives exact UTF-8 file bytes and record identities before
+removing active JSON/Markdown files. The archive doubles as a recovery journal.
+Restore is idempotent, requires parent records, and refuses changed IDs or files.
+All archive paths must resolve under the active data root and outside definitions.
+Cleanup archives remain local in `.experiment-data-trash/`, excluded from Git and
+active JSON exports. Batch naming reserves names in trash. No permanent purge is
+exposed. The app does not clean up any records until the user previews and confirms.
+
+## Follow-up guidance retired (2026-09-25)
+
+The active application no longer has follow-up guidance. Source templates contain
+only openings. The editor and floating View/Style panel use style openings; the
+human writes all follow-ups. Current catalogs are upgraded to a new revision with
+the obsolete field removed, and stale clients cannot save it back. Old catalog
+revisions and frozen conversation/batch/report snapshots remain historical records.
+Earlier descriptions of guidance and the automated CLI are historical only; legacy
+CLI reproduction requires its historical checkout and is not the collection workflow.

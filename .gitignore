@@ -3,3 +3,9 @@
 results/
 __pycache__/
 *.tmp
+data/
+.pytest_cache/
+experiment-data/.pending.json
+experiment-data/.sqlite-migrated
+
+.experiment-data-trash/

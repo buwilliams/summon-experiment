@@ -8,10 +8,14 @@ dependencies = [
     "httpx",
     "pyyaml",
     "python-dotenv",
+    "fastapi",
+    "uvicorn",
+    "markdown-it-py>=3,<5",
 ]
 
 [project.scripts]
 summon = "summon.cli:main"
+summon-web = "summon.web:main"
 
 [build-system]
 requires = ["hatchling"]

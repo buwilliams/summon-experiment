@@ -1,117 +1,139 @@
 # Summon experiment
 
-**Which prompting style performs best?**
+## Human-led web workspace (current)
 
-We compare four styles: asking plainly, assigning a persona, naming a method, and enacting the method in its own vocabulary. "Best" means the outcome a judge prefers. The hypothesis is that enacting a method (asking the questions a practitioner would ask, in their language) summons that way of reasoning and beats the other styles. A fifth condition, the same kind of structured questions asked by a curious child, checks that any gain comes from the method and not just from asking more questions. Claude Opus 5.5 is the subject model and [Jev](https://openrouter.ai/docs/guides/community/jev-tutorial) (via OpenRouter) is the judge. The full design is in [`spec.md`](spec.md).
+Summon has five browser screens: **Collect**, **Hypotheses**, **Analyze**,
+**Results**, and **Data**. The subject is **GPT-6 Astra**
+(`openai/gpt-6-astra` through OpenRouter); Jev remains the judge.
 
-## Design
+### Start locally on Windows
 
-Five prompting **conditions**, compared on the same scenarios:
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -e .
+.\.venv\Scripts\summon-web.exe
+```
 
-| | Condition | What the opening does |
-|---|---|---|
-| A | Plain | The scenario only. |
-| B | Persona | Adds the lens's identity ("a world-class philosopher of science"), without naming the method. |
-| C | Method named | Names the method ("Use the method of conjectures and refutations…"). |
-| D | Method enacted | Asks the questions a practitioner would ask, in the method's vocabulary. **The treatment.** |
-| E | Child lens | Same form as D, asked by a curious child. Control for "any structured prompt helps". |
+Or use `uv sync` and `uv run summon-web`. Open http://127.0.0.1:8765.
+Set `OPENROUTER_API_KEY` in the gitignored `.env` file. Both providers use this
+key; it stays on the server. `SUMMON_PORT` overrides port 8765. No WSL is required.
+The server binds to loopback and is intended for a single local user, not public hosting.
 
-Each condition is run through three **lenses**, one experiment each:
+### Collect and compare
 
-| Lens | Governing value | Method |
-|---|---|---|
-| `critical-rationalism` | Clear thinking | Conjecture and refutation |
-| `social` | Popularity | Impression management |
-| `economic` | Profits | Profit maximization |
+Collect opens with hypothesis cards, then experiment cards. The experiment screen
+shows the case and a single start action; existing batches appear below it. Starting
+creates a batch and opens Astra's first recommendation. A batch screen holds progress,
+resume, review/revision, and the Analyze handoff. Breadcrumbs return to these choices
+without adding setup controls to the conversation. Tests and styles are assigned by
+the system, and the floating assignment remains beneath the composer.
 
-…on three business **scenarios** (`independent-lab`, `legacy-rewrite`, `churn-cause`): 3 lenses × 3 scenarios × 5 conditions = **45 tests**.
+Batch names use **Batch YYYYMMDD-N**. Each session submits one selected assistant
+response. Revising preserves the original and replaces its submission for future
+reports; existing reports retain their frozen inputs.
 
-**How a test runs.** Each test is a short conversation: the condition's opening, then three follow-up questions written by a separate model call following the condition's guidance, then a fixed "What should we do?" A summarizer condenses the outcome (the final recommendation, its reasons and caveats) to about 250 words.
+1. Open **Collect**. The system resumes unfinished work or assigns the next
+   experiment, test, and style automatically. The experiment appears in the conversation.
+   The app sends the experiment, test, and style to Astra automatically and requests
+   a recommendation with reasons. Then the empty message box lets you question
+   that response. The exact initial prompt is available in the conversation.
+   Participant and batch are managed locally.
+2. Select any complete assistant response as the solution. This freezes the
+   session and submission. Full messages, model output, usage, and timestamps are retained.
+3. The editor can add/edit experiments, tests, and styles. Each save starts a new
+   catalog revision; existing sessions keep their original content. Submission
+   notes and inclusion can change, but submitted text cannot be silently rewritten.
+4. Select a completed batch in Analyze. It uses the latest submitted
+   response for each session and creates a report for the experiment.
+   Every planned session must be submitted and included; readiness is shown
+   before running. Use a new batch for independent repeats.
+5. Jev compares every pair within each test, in both answer orders. Mean
+   preference determines the test winner; tied winners all advance. Winners from
+   different tests are then compared pairwise. Results retains raw calls,
+   order effects, coverage, and rankings. Failed/interrupted reports can resume.
 
-**How it's judged.** Jev never sees the lens, condition, or prompt. It gets the scenario and anonymous outcome summaries and answers "Which answer do you think is better?"; its probability for each answer is that answer's **preference score**. There are two comparisons:
+Web data lives in **`experiment-data/`**, as Git-trackable JSON plus readable
+Markdown companions. See [the data layout](experiment-data/README.md). JSON is
+the source of truth; Markdown is generated on each save. Every catalog revision
+is retained. Use **Export workspace** for a combined JSON export, or back up the
+folder with the server stopped. Run only one server process per data folder.
+Existing `data/summon.sqlite3` is automatically migrated and verified on first
+startup, then retained locally as a backup. Old `data/` logs stay gitignored.
+Saving data does not automatically commit or push it to GitHub.
+Large answers are sent verbatim; a provider context-limit error leaves the report
+failed and resumable, never silently truncated or summarized. API calls incur
+normal provider charges. A five-style test requires 20 Jev calls; three tests
+usually require 66 calls including the winner round (ties increase that count).
 
-- **Within a lens:** A–E for each scenario (baseline 0.20).
-- **Across lenses:** the D outcomes of the three lenses for each scenario (baseline 0.33).
+Validation: `.\.venv\Scripts\python.exe -m unittest discover -s tests -v`.
+Tests use a fake gateway and temporary data folders, without paid calls.
 
-## Results
+Protocol details and limitations are at the top of [spec.md](spec.md).
 
-From one full run (`results-three-lens-run2/`) of the current tests. Each number is Jev's preference score: its probability that an outcome is the best of those compared.
+## Experiment definitions
 
-### Individual experiments
+The three experiments and three tests (critical rationalism, social, economic),
+with prompting styles A–E, remain in `experiments/` and the saved catalog in
+`experiment-data/catalog/`. These are the definitions for fresh batches.
 
-One table per scenario. Each column is one lens's comparison of its five outcomes (0.20 means no preference); **bold** marks the lens's top condition. The line below each table compares the three lenses' D outcomes head to head (0.33 means no preference).
+Collected automated results and previous interview data were cleared from the
+working tree on 2026-09-25. No old scores are presented as current evidence.
+The original CLI code remains available for historical reproduction; new data
+collection uses the web app.
 
-**independent-lab**
+### Hypotheses, experiments, tests, and human judging
 
-| Condition | critical-rationalism | social | economic |
-|---|---|---|---|
-| A Plain | 0.10 | 0.18 | 0.15 |
-| B Persona | 0.24 | 0.17 | 0.14 |
-| C Method named | **0.37** | 0.03 | 0.22 |
-| D Method enacted | 0.16 | 0.20 | 0.24 |
-| E Child lens | 0.13 | **0.42** | **0.25** |
+The definition hierarchy is **Hypothesis → Experiment → Test → Style**.
+An experiment is one case (formerly called a scenario), not a container of cases.
+A test supplies a perspective, such as Critical Rationalism, Economic, or Social.
+Styles A–E specify how to prompt within that test. **Collect** creates batches
+for one experiment and assigns a chat session for each test/style combination.
 
-Across lenses (D): **critical-rationalism 0.42**, social 0.39, economic 0.19
+In **Analyze**, select a completed batch and run Jev reports. Then enter a consistent
+reviewer name and choose **Judge responses**. Compare anonymous A/B responses, choose
+A, B, or a tie, and optionally record why. Jev's judgment appears after saving your
+preference. Resume with the same reviewer name; recorded preferences are preserved.
 
-**legacy-rewrite**
+**Results** shows human preferences separately from Jev probabilities, including pair
+coverage and agreement. Full Jev results appear after that reviewer completes the report.
+Cross-test comparisons continue to use Jev's finalists. Reviewer names identify local
+records, not accounts. The exported workspace includes human judgment records.
 
-| Condition | critical-rationalism | social | economic |
-|---|---|---|---|
-| A Plain | 0.02 | 0.14 | 0.16 |
-| B Persona | 0.24 | 0.07 | 0.21 |
-| C Method named | 0.23 | **0.40** | 0.27 |
-| D Method enacted | 0.22 | 0.01 | 0.06 |
-| E Child lens | **0.29** | 0.38 | **0.30** |
+New JSON and Markdown records follow `hypotheses/…/experiments/…/batches/…/`, with
+`tests/`, `reports/`, and `judgments/` beneath each batch. Catalog revisions retain
+hypothesis statements and experiment scopes. Chat displays Markdown while preserving
+the original text for submission and judging.
 
-Across lenses (D): critical-rationalism 0.40, social 0.08, **economic 0.52**
+### Development cleanup
 
-**churn-cause**
+Open **Data** to see record counts, export the active workspace, and preview cleanup.
+You can remove one report, a session and its complete revision history, a whole batch,
+all collected data for an experiment, human judgments only, or all collected data.
+The preview includes dependent reports and human judgments. Confirm with **Move these
+records to trash**; **Restore** returns the saved files without overwriting changes.
 
-| Condition | critical-rationalism | social | economic |
-|---|---|---|---|
-| A Plain | 0.16 | 0.12 | **0.36** |
-| B Persona | 0.06 | 0.13 | 0.29 |
-| C Method named | 0.03 | **0.61** | 0.06 |
-| D Method enacted | **0.73** | 0.02 | 0.16 |
-| E Child lens | 0.02 | 0.12 | 0.13 |
+Hypotheses, experiment definitions, tests, styles, and catalog
+revision history are retained. Trash is stored locally in `.experiment-data-trash/`
+and ignored by Git. The workspace export contains active data; back up the trash
+folder separately if you want to retain cleanup archives when moving the project.
+Model requests and running reports must finish before cleanup or restore. Interrupted
+cleanup/restores resume at startup. Batch date suffixes are not reused after cleanup.
 
-Across lenses (D): **critical-rationalism 0.73**, social 0.16, economic 0.11
+### Focused hypothesis editor
 
-### Cumulative
+The **Hypotheses** screen drills down through hypothesis → experiment → test →
+style. Each level shows its own editable content and the next choices. Breadcrumbs
+return to parent levels. Type in an editable dropdown to rename its selected record;
+use the centered chevron to select a sibling or the adjacent + to add one.
 
-**All nine comparisons** (3 scenarios × 3 lenses), each weighted equally. The lens columns average each lens's three scenarios.
+Definitions, submission notes, and inclusion changes save automatically after a
+short pause. A status shows Saving, Saved, or a save error. Incomplete new records
+are kept as local drafts until required fields are filled. Drafts also survive a
+reload or failed request. A conflicting server revision is never silently overwritten.
 
-| Rank | Condition | Average score | Comparisons won | critical-rationalism | social | economic |
-|---|---|---|---|---|---|---|
-| 1 | C Method named | 0.25 | 3 of 9 | 0.21 | **0.35** | 0.18 |
-| 2 | E Child lens | 0.23 | 3 of 9 | 0.15 | 0.31 | **0.23** |
-| 3 | D Method enacted | 0.20 | 2 of 9 | **0.37** | 0.08 | 0.15 |
-| 4 | B Persona | 0.17 | 0 of 9 | 0.18 | 0.12 | 0.21 |
-| 5 | A Plain | 0.15 | 1 of 9 | 0.09 | 0.15 | 0.22 |
-
-**Across lenses:** each lens's D outcome, averaged over the three scenarios:
-
-| Rank | Lens | Average score | Scenarios won |
-|---|---|---|---|
-| 1 | critical-rationalism | 0.52 | 2 of 3 |
-| 2 | economic | 0.27 | 1 of 3 |
-| 3 | social | 0.21 | 0 of 3 |
-
-**Reading these:** each cell comes from one conversation and one Jev call, and earlier runs showed that single runs can reorder, so treat small differences as noise. The full conversations are in `results-three-lens-run2/<scenario>/<lens>/<test>.md`, and Jev's raw judgments are in the `judgment.json` files.
-
-## Running it
-
-Ask your coding agent (Claude Code, Codex, or similar) to run the experiment: operational instructions for agents are in [`AGENTS.md`](AGENTS.md). The one thing only you can provide is two API keys, which the agent will ask you to put in a local `.env` file:
-
-- **Anthropic:** from https://console.anthropic.com → Settings → API Keys. API usage is billed to Console credits, separately from a Claude subscription.
-- **OpenRouter** (for Jev): from https://openrouter.ai/settings/keys.
-
-A full run takes about 30 minutes and costs roughly $25 in Opus usage; Jev's cost is negligible.
-
-## What's where
-
-- `spec.md`: the full design.
-- `experiments/`: organized scenario > lens > test. Each scenario folder (`###-<name>/`) holds `scenario.md` and a folder per lens with the five test files. Each test file holds the opening prompt and the guidance for its follow-up questions; a lens's tests are identical in every scenario.
-- `results-three-lens-run2/`: the run reported above, with every conversation in readable Markdown and a `report.md`.
-- `results-three-lens-run1/`, `results-oneshot-run1/`, `results-oneshot-run2/`, `results-conversation-run1/`, `results-archive/`: earlier runs from previous versions of the design (older B, D, and E; one-shot prompts; a single lens). Useful for historical comparison, but not directly comparable with the current results.
-- `src/summon/`: the code.
+Active catalog schema 2 stores experiment text directly on each experiment;
+there is no separate scenario list or study container. Internal `views`, `view_ids`,
+and session `scenario`/`view` keys remain compatibility names for tests and frozen
+experiment context. Opening templates now use `{{EXPERIMENT}}`; the old token is
+still recognized when reading historical files. Original source templates under
+`experiments/` are seed material, not the live catalog.
